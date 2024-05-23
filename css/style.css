@@ -1,0 +1,1723 @@
+/*стили для модальных окон регистрации и входа*/
+.modal1 {font-family: "Mariupol";                     
+    font-size:3vmax;
+    grid-row:3;
+    grid-column:1/3;}
+#formEnter {grid-row:5/8;
+       grid-column:1/3;
+       width:60%;
+       height:100%;
+       display:grid;
+       grid-template-columns: 100%;
+       grid-template-rows:repeat(3,1fr);
+       row-gap:15%;}
+#formReg {grid-row:5/8;
+       grid-column:1/3;
+       width:60%;
+       height:100%;
+       display:grid;
+       grid-template-columns: 100%;
+       grid-template-rows:repeat(4,1fr);
+       row-gap:12%;}
+.inputModal {width:100%;       
+  height:100%;
+  padding-left: 5%;
+  font-size: 1.1vmax;
+  box-sizing: border-box;
+  font-family: "Inter";
+  color: #6c6c6c;
+  border-radius: 1vmax;
+  grid-column:1;
+  border: 0.1vmax solid #6c6c6c;} 
+.closeEnterReg {grid-row:2;
+        grid-column:1;
+        justify-self: end;
+        width:4vmax;
+        height:4vmax;}
+.buttonEnterReg {height:100%;
+            width:70%;
+            justify-self: center;}
+#modalShadow {width:100%;
+         position:absolute;
+         display:none;
+         top:0;
+         left:0;
+         background-color: rgba(0,0,0,0.5);}
+#modalEnter {grid-template-rows: 5% 5% 15% 10% 1fr 5% 10% 13%;}
+.modalRegEnter {border-radius:1.5vmax;
+       position:fixed;
+       top:-50%;
+       left:50%;
+       transform: translate(-50%, -50%);
+       transition: all .6s ease-in;
+       background-color: #f9f9f9;
+       border: 0.15vmax solid #2D4EFF;
+       display:grid;
+       grid-template-columns: auto 4%;
+       justify-items: center;}
+#modalReg {grid-template-rows: 5% 5% 12% 10% 1fr 20% 10% 13%;}
+#close {grid-row:2;
+        grid-column:3;
+        width:4vmax;
+        height:4vmax;}
+     .labelModal {grid-column:1;
+     margin-top: 1%;
+     margin-left: 5.1%;
+     font-family: "Inter";
+     font-size: 0.9vmax;
+     color:#6c6c6c;
+     height:10%;
+     width:100%;
+     display:none;}
+     #labelEnterEmailTel, #labelRegName, #enterEmailTel, #regName {grid-row:1;}
+     #labelEnterPass, #labelRegEmailTel, #enterPass, #regEmailTel {grid-row:2;}
+     #buttonEnter, #labelRegPass, #regPass {grid-row:3;}
+
+/*сброс стандартного поведения некоторых элементов*/
+* {margin:0;
+padding:0;
+border: 0;
+font-size: 100%;}
+html, body {background-color: #f9f9f9;}
+a {text-decoration: none;
+color:inherit;}
+h1 {font-weight: 100;}
+input:focus {outline: none;}
+select:focus {outline:none;}
+
+/*подключение шрифтов*/
+@font-face { font-family: "Inter";
+   src: url("../fonts/Inter-Regular.woff"); 
+  font-weight: normal;
+  font-style: normal; }
+@font-face { font-family: "Inter Light";
+   src: url("../fonts/Inter-LightBETA.woff"); 
+  font-weight: normal;
+  font-style: normal; }
+@font-face { font-family: "Mariupol";
+   src: url("../fonts/Mariupol-Regular.woff"); 
+  font-weight: normal;
+  font-style: normal; }
+
+/*общие стили, используемые практически на всех страницах*/
+.blueButton {background-color: #2D4EFF;
+        border: none;
+        border-radius: 0.75vmax;
+        color:white;
+        font-size: 1.2vmax;
+        font-family: "Inter";}
+.void {height:13vmax;
+        width:100%;}
+
+/*общие медиа-запросы для nav, footer и для страницы board*/
+@media (max-width:480px) {#modalEnter {width:80%;
+                                  height:33%;}    
+                     #modalReg {width:80%;
+                                height:40%;}     
+                     #headline2 {width:85%;}  
+                     #timetableBlock {height:70vmax;
+                                     grid-template-rows: 5% 3% 4% 3% 4% 10% 1fr 3% 1fr 3% 1fr;}
+                    #footerCol3 {width:90%;
+                                 justify-self: end;}  }
+@media (max-width:1199px) and (orientation: portrait) {nav {height:8vh;
+                                                                grid-template-columns:5% 10vw 1.5vw 15vw 1fr 0.9fr 2% 0.9fr 2% 5% 5%;} 
+                                                        #navigation {display: none;}
+                                                        #menuMobile {grid-column:10;
+                                                                        width:100%;
+                                                                        align-self:center;} 
+                                                                        #navMobile {grid-template-columns: 10% auto 16% 12%;
+                                                                                grid-template-rows: 2.5% 3.5% auto;}  
+                                                        #tableHead {grid-template-columns: 1fr repeat(4,0.75fr);
+                                                                        grid-template-rows: repeat(2,1fr); 
+                                                                row-gap:15%;}
+                                                        .tableText1 {grid-row:1;
+                                                                        grid-column:1;} 
+                                                        .tableText2 {grid-row:2;
+                                                                        grid-column:1;} 
+                                                        .tableText3 {grid-row:1;
+                                                                        grid-column:2;} 
+                                                        .tableText4 {grid-row:2;
+                                                                        grid-column:2;} 
+                                                        .tableText5 {grid-row:1;
+                                                                        grid-column:3;}
+                                                        .tableText6 {grid-row:2;
+                                                                        grid-column:3;} 
+                                                        .tableText7 {grid-row:1;
+                                                                        grid-column:4;
+                                                                        justify-self: center;} 
+                                                        .tableText8 {grid-row:1;
+                                                                justify-self: center;
+                                                                        grid-column:5;} 
+                                                        .tableText9 {grid-row:3;
+                                                                grid-column:2;}
+                                                        .tableText10 {grid-row:3;
+                                                                grid-column:3;} 
+                                                        .wrapTimetable {grid-template-columns: 1fr repeat(4,0.75fr);
+                                                                        grid-template-rows: repeat(3,1fr); 
+                                                                        row-gap:10%;}
+                                                        footer {grid-template-columns: 1fr 8% 1fr;
+                                                                grid-template-rows: 50% 50%;
+                                                                height:42vmax;}
+                                                        #gradMobileNone {display:none;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation: portrait) {#modalEnter {width:60%;
+                                                                                                height:33%;}    
+                                                                                #modalReg {width:60%;
+                                                                                                height:40%;}  
+                                                                                #headline2 {width:60%;} 
+                                                                                #timetableBlock {height:70vmax;
+                                                                                        grid-template-rows: 5% 3% 3% 3% 5% 10% 1fr 3% 1fr 3% 1fr;}
+                                                                                #footerCol3, #footerCol4, #footerCol2 {width:90%;
+                                                                                                                         justify-self: end;}    }
+                               
+@media (min-width:481px) and (max-width:1199px) and (orientation: landscape) {
+                                           #navigation {display: flex;}
+                                           #menuMobile {display:none;}  
+                                       #headline2 {width:40%;} 
+                                       #timetableBlock {height:50vmax;
+                                                       grid-template-rows: 7% 5% 5% 5% 5% 5% 1fr 3% 1fr 3% 1fr;}
+                                       #tableHead {grid-template-columns: repeat(8,1fr);
+                                                    grid-template-rows: 100%; } 
+                                       .terminalGate {justify-self: center;}
+                                       .wrapTimetable {grid-template-columns: repeat(8,1fr);
+                                                       grid-template-rows: 60% auto;  }  
+                                       .code1 {grid-row:2;
+                                               grid-column:2;}         
+                                       .code2 {grid-row:2;
+                                                grid-column:4;}  
+                                       footer {grid-template-columns: 1.2fr 5% 1fr 5% 1fr 5% 1fr;
+                                                        grid-template-rows: 100%;
+                                                        height:23vmax;}      }
+@media (min-width:481px) and (max-width:850px) and (orientation: landscape){nav:not(.navEnteredUser) {height:14vh;
+                                                                                                        grid-template-columns:5% 5vw 1vw 10vw 1fr 0.2fr 2% 0.2fr 5%;}
+                                                                          #modalEnter {width:40%;
+                                                                                        height:65%;}    
+                                                                        #modalReg {width:40%;
+                                                                                height:85%;}  }
+@media (min-width:851px) and (max-width:1199px) and (orientation: landscape) {nav:not(.navEnteredUser) {height:12vh;
+                                                                                                        grid-template-columns:5% 5vw 1vw 10vw 1fr 0.2fr 2% 0.2fr 5%;}
+                                                                                #modalEnter {width:60%;
+                                                                                        height:50%;}    
+                                                                                #modalReg {width:60%;
+                                                                                        height:60%;}  }
+@media (max-width:1720px) and (min-width:1200px) {nav:not(.navEnteredUser) {height:12.5vh;
+                                                                           grid-template-columns:5% 5vw 1vw 10vw 1fr 0.2fr 2% 0.2fr 5%;}   }
+@media (min-width:1200px) {#navigation {display: flex;}
+                                #menuMobile {display:none;} 
+
+                                #modalEnter {width:40%;
+                                        height:60%;} 
+                                #modalReg {width:40%;
+                                        height:80%;}
+                                #headline2 {width:40%;} 
+                                #timetableBlock {height:50vmax;
+                                                grid-template-rows: 7% 5% 5% 5% 5% 5% 1fr 3% 1fr 3% 1fr;} 
+                                #tableHead {grid-template-columns: repeat(8,1fr);
+                                        grid-template-rows: 100%; } 
+                                .terminalGate {justify-self: center;}
+                                .wrapTimetable {grid-template-columns: repeat(8,1fr);
+                                                grid-template-rows: 60% auto;  }     
+                                .code1 {grid-row:2;
+                                        grid-column:2;}         
+                                .code2 {grid-row:2;
+                                        grid-column:4;} 
+                                footer {grid-template-columns: 1.2fr 5% 1fr 5% 1fr 5% 1fr;
+                                        grid-template-rows: 100%;
+                                        height:23vmax;} }
+@media (min-width:1721px) {nav:not(.navEnteredUser) {height:14vh;
+                           grid-template-columns:5% 5vw 1vw 10vw 1fr 0.2fr 2% 0.2fr 5%;}  }
+
+/*общее меню навигации для гостя*/
+nav {width:100%; 
+display:grid;
+grid-template-rows:100%;}
+#logo {max-width: 100%;
+  max-height: 75%;
+  min-width:90%;
+  min-height:55%;
+ align-self:center;
+ grid-column:2;
+ grid-row:1;}
+#logoText {grid-column:4;
+      color:#2D4EFF;
+      font-family: "Inter Light";
+      font-size: 1.4vmax;
+      align-self: center;
+      grid-row:1;}
+#navigation {grid-column:1/span all;
+        grid-row:1;
+        width:30%;
+        justify-self: center;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "Inter";
+        font-size: 1.4vmax;}
+#curPage {color:#2D4EFF;
+     display: grid;
+     grid-template-columns: 100%;
+     grid-template-rows: 100%;
+     height:100%;}
+#curPage a {grid-row:1;
+       grid-column:1;
+       align-self: center;}
+#blueLine {width:0.2vmax;
+      height: 30%;
+      grid-row:1;
+      grid-column:1;
+      background-color: #2D4EFF;
+      justify-self: center;}
+.blueLine {width:3%;
+        height: 30%;
+        grid-row:1;
+        grid-column:1;
+        background-color: #2D4EFF;
+        justify-self: center;}
+.navBlue:hover {color:#2D4EFF;}
+#reg {grid-column: 8;
+ grid-row:1;
+ align-self:center;}
+#enter {grid-column: 6;
+  grid-row:1;
+  align-self:center;}
+#reg, #enter {height:4vmax;} 
+#navMobileShadow {background-color: rgba(0,0,0,0.5);
+             width:60%;
+             height:100%;
+             position:absolute; 
+             top:0;
+             left:0;}
+#navMobile {background-color: rgba(32, 50, 152, 0.9);
+       width:40%;
+       height:100%;
+       position:absolute;
+       top:0;
+       right:0;}
+#navMobileText {align-self:center;
+           color:white;
+           height:40%;
+           width:5%;
+           font-family: "Inter";
+           font-size: 1.5vmax;
+           grid-column:2;
+           grid-row:1/span all;
+           grid-template-rows: repeat(4,1fr);
+           grid-template-columns: 100%;}
+#navMobileShadow, #navMobile, #navMobileText {display:none;}
+
+/*общий футер*/
+footer {display:grid;}
+footer img {height:100%;
+       width:100%;}
+#footerCol1 {display: grid;
+        grid-template-rows: 3% 18% repeat(3, 1fr) 7%;}
+@media (max-width:480px) {#footerCol1 {grid-template-columns: 10% 17% 5% auto;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation: portrait) {#footerCol1 {grid-template-columns: 10% 11% 5% auto;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation: landscape) {#footerCol1 {grid-template-columns: 10% 17% 5% auto;} }
+@media (min-width:1200px) {#footerCol1 {grid-template-columns: 10% 17% 5% auto;} }
+#buttonFooterText1, #buttonFooterText2,  #buttonFooterText3 {font-family:"Inter";
+                                                       font-size: 1.3vmax;
+                                                       align-self: center;}
+.headlineFooter {grid-row:2;
+            grid-column: 2/5;}
+.buttonFooter {border-radius: 1000vmax;
+          background-color: #2D4EFF;
+          align-self:center;
+          border:none;
+          width:4vmax;
+          height:4vmax;
+          display:grid;
+          justify-items: center;
+          align-items: center;}
+#buttonF1 {grid-row:3;
+      grid-column: 2;}
+#buttonF2 {grid-row:4;
+      grid-column: 2;}
+#buttonF3 {grid-row:5;
+      grid-column: 2;}
+.imgButtonFooter {width:50%;
+             height:50%;}
+#buttonFooterText1 {grid-row:3;
+               grid-column:4;}
+#buttonFooterText2 {grid-row:4;
+               grid-column:4;}
+#buttonFooterText3 {grid-row:5;
+               grid-column:4;}
+.footerPart {display: grid;
+        grid-template-columns: 10% auto;
+        grid-template-rows: 3% 10% repeat(4, 1fr) 25%;}
+.footerPart div:not(.headlineFooter, .headline) {font-size: 1.3vmax;
+                                            font-family: "Inter";
+                                            color:#6c6c6c;}
+.footerPartRow4 {grid-row:4;
+           grid-column:1/span all;}
+.footerPartRow5 {grid-row:5;
+            grid-column:1/span all;}
+.footerPartRow6 {grid-row:6;
+           grid-column:1/span all;}
+.footerPartRow7 {grid-row:7;
+           grid-column:1/span all;}
+footer a:hover {color:#2D4EFF;}
+.so:hover {color:#2D4EFF;}
+
+/*стили для board*/
+#timetableBlock, .gridNew {width:100%;
+           display:grid;
+           grid-template-columns:3% auto 3%;}
+.headline {font-size: 2.3vmax;
+      font-family: "Mariupol";}
+#headline1 {grid-row:2;     
+       grid-column:2;}
+#headline2 {grid-row:4;
+       justify-self: center;
+       display:flex;
+      grid-column:2;
+       justify-content: space-evenly;}
+#today {color:#2D4EFF;}
+#tableHead {display:grid;
+      width:97%;
+      justify-self: end;
+       grid-column:2;
+       grid-row:6;}
+#tableHead div {color:#6c6c6c;
+           font-size: 1.4vmax;
+           font-family: "Inter";}
+.timetable, .flightInfo, .servBlock, .resultSearch {grid-column:2;
+        background-color: white;
+        border-radius:1.5vmax;
+        border: 0.15vmax solid #2D4EFF;}
+#timetable1, #timetable1T, #timetable1Y {grid-row:7;}
+#timetable2, #timetable2T, #timetable2Y {grid-row:9;}
+#timetable3, #timetable3T, #timetable3Y {grid-row:11;}
+#timetable1, #timetable2, #timetable3 {display: grid;}
+#timetable1T, #timetable2T, #timetable3T {display:none;}
+#timetable1Y, #timetable2Y, #timetable3Y {display:none;}
+.wrapTimetable {width:97%;
+           height:80%;
+           align-self: end;
+           justify-self: end;
+           display:grid;}
+.timetable div :not(.code1, .code2) {font-family: "Inter";
+           font-size: 1.5vmax;}
+.statusGreen {color:#2A7E1D;}
+.statusRed {color:#AB2929;}
+.statusYellow {color:#BBAC28;}
+.code1 {color:#6c6c6c;
+   font-size: 1.2vmax;
+   font-family: "Inter";}
+.code2 {color:#6c6c6c;
+   font-size: 1.2vmax;
+   font-family: "Inter";}
+
+/*стили для страницы index*/
+@media (max-width:480px) {#headerMain {height:70vmax;}  
+#searchBlock {grid-template-columns: 5% 0.1% auto;
+               grid-template-rows: 5% 20% auto;} 
+#imgAirplane {display:none;} 
+#imgSky {display:none;}
+#headlineHeader {font-size:4vmax;} 
+.void2 {display:none;} 
+#sliderBlock {grid-template-columns: 3% 7% 2% auto 2% 7% 3%;
+           height: 17vmax;
+           grid-template-rows: 100%;}
+.slide {grid-template-rows:55% 30% 1% 3% auto;} 
+.slideHeadline{font-size:2vmax;}  
+.slideA{font-size:1vmax;}   } 
+@media (min-width:481px) and (max-width:1199px) and (orientation: portrait) {#headlineHeader {font-size:4.7vmax;}
+                                                   #headerMain {height:80vmax;}
+                                                   #searchBlock {grid-template-columns: 10% 0.1% auto;
+                                                                grid-template-rows: 5% 23% auto;} 
+                                                                           #imgAirplane {display:none;} 
+                                                                           #imgSky {display:none;}
+                                                   .void2 {display:none;} 
+                                                   #sliderBlock {grid-template-columns: 3% 7% 2% auto 2% 7% 3%;
+                                                        height: 25vmax;
+                                                        grid-template-rows: 100%;}
+                                             .slide {grid-template-rows:72% 13% 1% 3% auto;} 
+                                             .slideHeadline{font-size:2vmax;}  
+                                             .slideA{font-size:1vmax;}   }
+@media (min-width:481px) and (max-width:1199px) and (orientation: landscape) {#headerMain {height:70vmax;} 
+                                                    #headlineHeader {font-size:4.5vmax;} 
+                                                    #searchBlock {grid-template-columns: 55% 7% auto;
+                                                                 grid-template-rows: 10% 20% auto;}
+                                                   #sliderBlock { height: 35vmax;
+                                                                   grid-template-columns: 3% 3% 2% auto 2% 3% 3%;
+                                                                   grid-template-rows: 100%;}
+                                                   .slide {grid-template-rows:75% 12% 1% 3% auto;}
+                                                   .slideHeadline{font-size:2.9vmax;}
+                                                   .slideA{font-size:1.4vmax;}  }
+@media (min-width:1200px) {#headerMain {height:70vmax;} 
+                           #searchBlock {grid-template-columns: 55% 7% auto;
+                                           grid-template-rows: 10% 20% auto;}
+                           #headlineHeader {font-size:4.5vmax;} 
+                           #sliderBlock { height: 35vmax;
+                                           grid-template-columns: 3% 3% 2% auto 2% 3% 3%;
+                                           grid-template-rows: 100%;}
+                           .slide {grid-template-rows:75% 12% 1% 3% auto;}
+                           .slideHeadline{font-size:2.9vmax;}
+                           .slideA{font-size:1.4vmax;} }
+#headerMain {width:100%;
+                display: grid;
+                grid-template-columns: 48% 10% auto;
+                grid-template-rows: 10% auto;}
+#navInHeader {grid-row:1;
+                grid-column:1/span all;}
+#searchBlock {display: grid;
+                grid-row:2;
+                grid-column:1/span all;}
+#imgAirplane {grid-column:1/3;
+                grid-row:1/3;
+                align-self:center;
+                width:100%;}
+#imgSky {grid-row:1/3;
+        grid-column:1;
+        height:100%;
+        width:80%;}
+#headlineHeader {grid-row:2;
+                grid-column:2/4;
+                font-family: "Mariupol";}
+#formHeader {display: grid;
+                grid-row:3;
+                grid-column:3;
+                grid-template-columns:1fr 10% 1fr 12%;
+                grid-template-rows:7% 6.5% 8% 7% 6.5% 8% 7% 6.5% 8% 7.5% auto;} 
+.inputSelectHeader {border-radius:0.5vmax;
+                font-weight: 500;
+                color: #6c6c6c;
+                padding-left: 7%;
+                box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08); 
+                font-family: "Inter";
+                font-size:1.1vmax;}
+.selectHeaderPassenger {grid-row:8;
+                        grid-column:1/4;
+                        border-radius:0.5vmax;
+                        font-weight: 500;
+                        color: #6c6c6c;
+                        width:75%;
+                        box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08); 
+                        font-family: "Inter";
+                        font-size:1.1vmax;
+                        display:grid;
+                        grid-template-columns: 5% 70% auto 5%;
+                        grid-template-rows: 100%;
+                        align-items: center;
+                        background-color: white;}
+.selectHeaderPassenger div {grid-column:2;}
+.selectHeaderPassenger img {height:auto;
+                           grid-column:3;
+                           justify-self: end;}
+@media (min-width:500px) and (max-width:1199px) and (orientation:portrait) {#longText {letter-spacing: -0.01vmax;} }
+@media (max-width:1199px) and (min-width:481px) and (orientation:portrait) {.selection {width:15%;}}
+@media (max-width:480px) and (orientation:portrait) {.selection {width:20%;}}
+@media (min-width:481px) and (max-width:1199px) and (orientation:portrait) {.selectHeaderPassenger img {width:1.8vmax;} }
+@media (max-width:480px) or (min-width:1200px) {.selectHeaderPassenger img {width: 1.6vmax;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation:landscape) {.selectHeaderPassenger img {width:1.6vmax;} }
+input[type="date"]  {padding-right: 5%;}
+@media (max-width:1199px) and (orientation:portrait) {input[type="date"]::-webkit-calendar-picker-indicator {background: url("../images/Polygon1.png") no-repeat;
+                                                                                                                background-size: 1.75vmax;
+                                                                                                                padding-right: 3%;
+                                                                                                                margin-top: 5%;}}
+@media (min-width:1199px) {input[type="date"]::-webkit-calendar-picker-indicator {background: url("../images/Polygon1.png") no-repeat;
+                                                                                        background-size: 1.4vmax;
+                                                                                        padding-right: 3%;
+                                                                                        margin-top: 5%;}}
+
+.selectHeader {background: url("../images/Polygon1.png") no-repeat;
+                appearance: none;
+                background-color: white;}
+@media (max-width:480px) {.selectHeader {background-size: 8.5%;
+                                        background-position: 95%;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation:portrait) {.selectHeader {background-size: 7%;
+                                                                                         background-position: 95%;} }
+@media (min-width:1200px) {.selectHeader {background-size: 8.5%;
+                                        background-position: 95%;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation:landscape) {.selectHeader {background-size: 8.5%;
+                                                                                         background-position: 95%;} }
+.labelHeader {font-family: "Inter";
+                font-weight: 600;
+                font-size: 1.3vmax;}
+#labelBack {grid-row:1;
+           grid-column:3;}
+#inputBack {grid-row:2;
+         grid-column:3;}  
+#inputThere {grid-row:2;
+                grid-column:1;}
+#labelFrom {grid-row:4;
+                grid-column:1;}
+#selectFrom {grid-row:5;
+                grid-column:1;}
+#labelTo {grid-row:4;
+        grid-column:3;}
+#selectTo {grid-row:5;
+        grid-column:3;}
+#labelPassenger {grid-row:7;
+                grid-column:1/4;}
+#buttonHeader {grid-row:10;
+                grid-column:1/4;
+                width:100%;}    
+.void2, .void2X {height:8vmax;
+                width:100%;}
+#sliderBlock {display:grid;
+                width:100%;}
+.slideButton {height:3vmax;
+                width:3vmax;
+                display:grid;
+                align-self: center;
+                background-color: #2D4EFF;
+                border-radius: 1000vh;}
+#slideButtonLeft {grid-column:2;}
+.slide { background-size: 100% 100%;
+        background-repeat: no-repeat;
+        display:grid;
+        grid-template-columns:3% auto;
+        border-radius:0.5vmax;
+        height:100%;}
+#slideWrap {grid-column: 4;
+                grid-row:1;
+                overflow:hidden;}
+#slideButtonRight {grid-column:6;}
+.slideButton svg {align-self: center;
+                justify-self: center;
+                width:35%;
+                height:35%;}
+.slideHeadline {color:white;
+                font-family:"Inter";
+                font-weight:600;
+                grid-row:2;
+                grid-column:2;}
+.slideA {color:white;
+        font-family:"Inter";
+        grid-row:4;
+        grid-column:2;}
+.slideA a:hover {color:#2D4EFF;}
+#slide1 {background-image: url("../images/ca40bf3ffe3dc71fdc78f0060416a9cd1.png");
+position:relative;
+left:0%;
+top:0%; }
+#slide2 {background-image: url("../images/tak-vyglyadit-obed-pri-perelete-dlitelnostyu-bolee-3-h-chasov1.png");
+position:relative;
+left:100%;
+top:-100%;}
+#slide3 {background-image: url("../images/33969_1000.jpg");
+position: relative;
+left:-100%;
+top:-200%;}
+
+/*стили для catalogue*/
+.noNavPage:hover {color:#2D4EFF;}
+.headlineGrid{height:5vmax;}
+.flightGrid {height:3vmax;}
+.grid {width:100%;
+        display:grid;
+        grid-template-columns: 5% auto 5%;;
+        grid-template-rows: 100%;}
+.headlineCol2 {grid-column:2;}
+.voidCatalogue {width:100%;
+                height:5vmax;}
+.voidCatalogueHalf {width:100%;
+                   height:3.5vmax;}
+.flight {font-family: "Inter";
+        font-size:2vmax;
+        grid-column:2;
+        justify-self: end;}
+.flightNo {color: #6c6c6c;}
+.flightInfo {column-gap: 3%;
+            display:grid;}
+.flightBlockClass { display:grid;
+                   font-family: "Inter";
+                   border-radius: 1vmax;
+                   font-size:1.4vmax;
+                   align-items: center;
+                   row-gap: 10%;}
+@media (min-width:1200px) or ((max-width:1199px) and (orientation:landscape)) {.flightInfoGrid {height:17vmax;}
+                                                                                .flightInfo {grid-template-rows:8% auto 8%;
+                                                                                        grid-template-columns: 0.1% 1fr 1fr 1.2fr 1fr 2fr 0.1%;} 
+                                                                                .flightBlockClass {grid-row:2;
+                                                                                                grid-column:6;
+                                                                                                grid-template-columns: 8% 1fr 1fr 8%;
+                                                                                                grid-template-rows: 0.1% repeat(3,1fr) 0.1%;
+                                                                                                background-color: rgba(45,78,255,0.06);}
+                                                                                .flightClassMinimum {grid-row:2;
+                                                                                                grid-column:2;}
+                                                                                .flightClassEconom {grid-row:3;
+                                                                                                grid-column:2;}
+                                                                                .flightClassBusiness {grid-row:4;
+                                                                                                grid-column:2;}
+                                                                                .buttonMinimum {grid-row:2;
+                                                                                                grid-column:3;
+                                                                                                height:100%;}
+                                                                                .buttonEconom {grid-row:3;
+                                                                                                grid-column:3;
+                                                                                                height:100%;}
+                                                                                .buttonBusiness {grid-row:4;
+                                                                                                grid-column:3;
+                                                                                                height:100%;}
+                                                                                .flightImgInWay {grid-row:1;
+                                                                                                width:110%;}  }
+@media (max-width:1199px) and (orientation:portrait) {.flightInfoGrid {height:32vmax;}
+                                                        .flightInfo {grid-template-rows:8% auto 5% 25% 8%;
+                                                                        grid-template-columns: 0.1% 1fr 1fr 1.3fr 1fr 0.1%;} 
+                                                        .flightBlockClass {grid-row:4;
+                                                                                grid-column:1/span all;
+                                                                                grid-template-columns: repeat(3,1fr);
+                                                                                grid-template-rows: repeat(2,1fr);
+                                                                                justify-items: center;
+                                                                                justify-content: space-evenly;} 
+                                                        .flightBlockClass button {width:90%;
+                                                                                height:75%;} 
+                                                        .flightImgInWay {grid-row:1;
+                                                                        width:130%;
+                                                                        padding-left:15%;}}
+.flightBlockDate {background-color: rgba(45,78,255,0.06);
+                grid-row:2; 
+                grid-column: 2;
+                border-radius: 1vmax;
+                display:grid;
+                grid-template-columns: 100%;
+                row-gap: 12%;
+                grid-template-rows: 0.1% repeat(3,1fr) 0.1%;
+                font-family: "Inter";
+                justify-items: center;}
+.flightDateRow1 {grid-row:2;
+                font-size:1.3vmax;}
+.flightDateRow2 {grid-row:3;
+                font-size:2.7vmax;
+                font-weight: 600;}
+.flightDateRow3 {grid-row:4;
+                font-size:1.5vmax;
+                font-weight: 600;}
+.flightBlockFrom, .flightBlockTo {display:grid;
+                                grid-template-columns: 100%;
+                                row-gap: 8%;
+                                grid-template-rows: 0.1% repeat(2,1fr) 5% 1fr auto;
+                                font-family: "Inter";
+                                justify-items: center;}
+.flightBlockTo {grid-row:2; 
+                grid-column: 5;}
+.flightBlockFrom {grid-row:2; 
+                 grid-column: 3;}
+.flightGray {color:#6c6c6c;}
+.flightFromToRow1 {grid-row:2;
+                font-weight: 600;
+                font-size: 2.2vmax;}
+.flightFromToRow2 {grid-row:3/5;
+                 font-size: 1.5vmax;
+                 justify-self: center;
+                 text-align: center;}
+.flightFromToRow3 {grid-row:5;
+                font-size: 1.5vmax;}
+.flightBlockInWay {display:grid;
+                  grid-template-columns: 100%;
+                 row-gap: 8%;
+                 grid-template-rows: 0.1% 37% 8% auto;
+                font-family: "Inter";
+                font-size:1.2vmax;
+                color:#6c6c6c;
+                justify-items: center;
+                grid-row:1/3;
+                grid-column:4;}
+.flightInWay {grid-row:3;}
+.flightClassBusiness, .flightClassEconom, .flightClassMinimum {color:#6c6c6c;}    
+.disabledButton {background-color: #6c6c6c;
+                color:white;
+                border: none;
+                border-radius: 0.75vmax;}
+
+/*общие стили для блока возврата на прошлые страницы*/
+.backToSearchA {grid-column:2;
+                display: grid;
+                max-width: 40%;
+                min-width: 20%;
+                grid-template-columns: 7% auto;
+                grid-template-rows: 100%;
+                align-items: center;}
+.backToSearch {color:#6c6c6c;
+                font-family: "Inter";
+                font-size: 1.4vmax;}
+.backToSearchA svg {width:1.2vmax;
+                   height:1.2vmax;}
+.gridForABack a {display:grid;
+                grid-template-columns: 8% auto;
+                column-gap:8%;
+                grid-template-rows: 100%;}
+.gridForABack a div {align-self:center;}
+.gridForABack svg {height:50%;
+                   align-self: center;
+                   width:auto;}
+
+/*стили для ticket*/
+.flightClassTick, .flightNoTick {font-weight: 600;}
+.conditionsGrid > div > svg, .conditionsGrid > div > img:not(#heightWidthBusiness) {height:2.5vmax;
+                                                                                   width:2.5vmax;}
+.conditionsGrid div {font-family: "Inter";}
+.conditionsBlue {color:#2D4EFF;}
+.conditionsDisabled {color:#6c6c6c;}
+.conditionsFontSize1 {font-size:1.8vmax;}
+#heightWidthBusiness {height:3.2vmax;
+                        width:3.2vmax;}
+.airplaneBlock img {width:100%;
+                    height:auto;}
+.airplaneBlock div {color:#2D4EFF;
+                    font-family: "Inter";
+                    font-size:1.9vmax;}
+.flightPrice {font-weight: 600;
+             font-size: 140%;}
+.detailedInfo {grid-column:2;
+                background-color: white;
+                box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08);
+                border-radius: 1vmax;
+                display:grid;}
+.baggageReturnBlock {grid-row:2;
+                    grid-column:2;}
+.airplaneConditionsBlock {grid-row:4;
+                        grid-column:4;
+                        height:80%;
+                        align-self: center;}
+.flightNoName, .flightClassName {color:#6c6c6c;}
+.airplaneBlock {display:grid;
+                grid-template-columns: 100%;
+                grid-template-rows: 12% auto;
+                row-gap:10%;}
+.conditionsGrid {display:grid;
+                grid-template-columns: 100%;
+                grid-template-rows: repeat(3,1fr);
+                row-gap:10%;
+                align-items: center;} 
+.conditionsGrid > div {display:grid;
+                        column-gap:3%;
+                        grid-template-rows: 100%;
+                        align-items: center;}
+
+/*медиа-запросы для ticket, catalogue*/
+@media (min-width:1200px) or ((max-width:1199px) and (orientation:landscape)) {.gridForABack {grid-column:2;
+                                                                                                display:grid;
+                                                                                                grid-template-columns: 1fr 1.3fr 1fr 1fr;
+                                                                                                column-gap:5%; 
+                                                                                                grid-template-rows: 100%;} 
+                                                                                .backGrid {height:3vmax;}
+                                                                                #specialVoidCat {display:block;}
+                                                                                #specialVoidCatMobile {display:none;} 
+                                                                                .continueCol4 {grid-column: 4;
+                                                                                        height:110%;}
+                                                                                .flightNoTick {grid-row:2;
+                                                                                                grid-column:2;}
+                                                                                .flightClassTick {grid-row:3;
+                                                                                                grid-column:2;}
+                                                                                .flightNoName {grid-row:2;
+                                                                                                grid-column:3;}
+                                                                                .flightClassName {grid-row:3;
+                                                                                                grid-column:3;}
+                                                                                .flightNoName, .flightClassName {justify-self: end;}
+                                                                                .flightPrice {grid-column:2/4;
+                                                                                                grid-row:4;
+                                                                                                width:70%;
+                                                                                                height:140%;
+                                                                                                border-radius: 1vmax;
+                                                                                                background-color: white;
+                                                                                                display:grid;
+                                                                                                align-items: center;
+                                                                                                justify-self: center;
+                                                                                                justify-items: center;}
+                                                                                .detailedInfoGrid {height:35vmax;}
+                                                                                        .detailedInfo {grid-template-columns: 5% 45% 5% auto 5%;
+                                                                                                grid-template-rows: 6% 50% 3% auto 5%;}
+                                                                                .baggageReturnBlock {height:70%;}
+                                                                                .blueConditionsBlock {grid-row:4;
+                                                                                                        grid-column:2;
+                                                                                                        height:90%;}
+                                                                                .airplaneBlock {grid-row:2;
+                                                                                                grid-column:4;} 
+                                                                                .conditionsGrid > div {grid-template-columns: 8% auto;} }                              
+@media (max-width:1199px) and (orientation:portrait) {.gridForABack {grid-column:2;
+                                                                        display:grid;
+                                                                        grid-template-columns: 1fr 1.3fr 1fr;
+                                                                        column-gap:5%; 
+                                                                        row-gap:15%;
+                                                                        grid-template-rows:1fr 1fr; } 
+                                                        .continueCol4 {grid-column: 3;}
+                                                        #specialVoidFooter {height:6vmax;}
+                                                        .backGrid {height:9vmax;}
+                                                        #specialCat {width:150%;}
+                                                        #specialVoidCat {display:none;}
+                                                        #specialVoidCatMobile {display:block;} 
+                                                        .flightPrice {align-self:center;
+                                                                        grid-row:1/span all;
+                                                                        grid-column:3;}
+                                                        .detailedInfoGrid {height:53vmax;} 
+                                                        .detailedInfo {grid-template-columns: 5% 45% 5% auto 5%;
+                                                                        grid-template-rows: 6% 40% 3% auto 5%;} 
+                                                        .baggageReturnBlock {grid-row:2;
+                                                                                grid-column:2;
+                                                                                height:90%;}
+                                                        .blueConditionsBlock {grid-row:2;
+                                                                                grid-column:4;
+                                                                                height:90%;}
+                                                        .airplaneBlock {grid-row:4;
+                                                                        grid-column:2;
+                                                                        align-self:center;}
+                                                        .conditionsGrid > div {grid-template-columns: 20% auto;} }
+
+/*стили для блока "Наши дополнительные услуги" в index*/
+.headlineBigger {font-family: "Mariupol";
+                font-size:3.1vmax;}
+.headlineMainServBlock div {align-self: center;}
+.headlineMainServ {grid-row:1;}
+.headlineMainServA {justify-self: end;
+                        display:grid;
+                        width:19vmax;
+                        grid-template-columns: 85% auto;
+                        grid-template-rows: 100%;}
+.fullListServ1 {font-size:1.4vmax;
+                color: #6c6c6c;
+                font-family:"Inter";}
+.fullListServ2 {width:1.2vmax;
+                height:1.2vmax;
+                align-self: center;}
+@media (max-width:480px) {.headlineMainServBlock {grid-column:2;
+                                           display:grid;
+                                           grid-template-columns: 50% 50%;
+                                           grid-template-rows: 50% 50%;}
+                   .headlineMainServ {grid-row:1/span all;
+                                   grid-column: 1/span all;
+                                   width:80%;}
+                   .headlineMainServA {grid-row:2;
+                                   grid-column:2;}
+                   .gridThreeColServ {height:140vmax;}
+                   .servBlockMain {grid-column:2;
+                                   display:grid;
+                                   row-gap:5%;
+                                   grid-template-rows:repeat(3,1fr);
+                                   grid-template-columns:100%;}
+                   .servBlockMain > div {width:75%;
+                                       justify-self: center;}
+                   .gridMainServ {height:10vmax;} }
+@media (min-width:481px) and (max-width:1199px) and (orientation:portrait) {.headlineMainServBlock {grid-column:2;
+                                                                                                        display:grid;
+                                                                                                        grid-template-columns: 70% auto;
+                                                                                                        grid-template-rows: 100%;}   
+                                                                                .headlineMainServA {grid-row:1;}
+                                                                                .gridThreeColServ {height:90vmax;}
+                                                                                .servBlockMain {grid-column:2;
+                                                                                                display:grid;
+                                                                                                row-gap:5%;
+                                                                                                grid-template-rows:repeat(2,1fr);
+                                                                                                column-gap:3%;
+                                                                                                grid-template-columns:repeat(2,1fr);}
+                                                                                .servBlockMain > div {width:100%;
+                                                                                                justify-self: center;}
+                                                                                .gridMainServ {height:6vmax;}}
+@media (min-width:1200px) {.servBlockMain {grid-column:2;
+                                        display:grid;
+                                        column-gap:3%;
+                                        grid-template-columns:repeat(3,1fr);
+                                        grid-template-rows:100%;}
+                        .gridMainServ {height:5vmax;}
+                        .gridThreeColServ {height:40vmax;}
+                        .headlineMainServA {grid-row:1;}
+                        .headlineMainServBlock {grid-column:2;
+                                display:grid;
+                                grid-template-columns: 50% 50%;
+                                grid-template-rows: 100%;}   }
+@media (min-width:481px) and (max-width:1199px) and (orientation:landscape) {.servBlockMain {grid-column:2;
+                                                                                                display:grid;
+                                                                                                column-gap:3%;
+                                                                                                grid-template-columns:repeat(3,1fr);
+                                                                                                grid-template-rows:100%;}
+                                                                                .gridMainServ {height:5vmax;}
+                                                                                .gridThreeColServ {height:40vmax;}
+                                                                                .headlineMainServA {grid-row:1;}
+                                                                                .headlineMainServBlock {grid-column:2;
+                                                                                        display:grid;
+                                                                                        grid-template-columns: 50% 50%;
+                                                                                        grid-template-rows: 100%;}   }
+.servCol {display:grid;
+        grid-template-columns: 5% auto;
+        grid-template-rows: 60% 3% 4.5% 3% 5% 4% 3% 4% 8.5% auto;
+        background-color: white;
+        box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08); 
+        border-radius: 0.75vmax;}
+.servBlockRow1 {width:100%;
+                height:100%;
+                grid-column:1/span all;}
+.servBlockRow2 {grid-row:3;
+                grid-column:2;
+                font-size:1.9vmax;
+                font-family:"Mariupol";}
+.servBlockRow3 {grid-row:5;
+                grid-column:2/4;
+                font-size:1.1vmax;
+                font-family:"Inter";
+                color:#6c6c6c;}
+.servBlockRow4 {grid-row:7;
+                grid-column:2;
+                font-size:1.4vmax;
+                font-family:"Inter";}
+.buttonLearnMore {grid-row:9;
+                grid-column:1/span all;
+                justify-self:center;
+                width:60%;}
+
+/*стили для раскрытия выбора количества пассажиров в index*/
+#blockForSelectHeaderPassenger {grid-row:9/11;
+                           grid-column:1/4;
+                           width:75%;
+                           height:155%;
+                           background-color: white;
+                           border-radius: 0.75vmax;
+                           box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08);
+                          row-gap:5%;
+                          grid-template-columns: 8% auto 8%;
+                         grid-template-rows: 8% 1fr 2% 1fr 8%;
+                         display: none;}
+#adultBlock {grid-row:2;}
+#childrenBlock {grid-row:4;}
+#adultBlock, #childrenBlock {grid-column:2;
+                                display:grid;
+                                grid-template-rows: 1fr 0.8fr;
+                                grid-template-columns: auto 12% 8% 5% 8% 12%;
+                                font-family: "Inter";}
+.passengerCategory {grid-row:1;
+                   font-size:1.3vmax;}
+.passengerDescription {grid-row:2;
+                        font-size:1vmax;
+                        color:#6c6c6c;}
+.passengerNumber {grid-row:1/span all;
+                align-self: center;
+                justify-self: center;
+                font-size:1.5vmax;
+                grid-column:4;}
+.buttonPlusMinus {border-radius:1000vmax;
+                width:2.3vmax;
+                height:2.3vmax;
+                align-self: center;
+                justify-self: center;
+                grid-row:1/span all;
+                display: grid;}
+.activeButton {background-color: #2D4EFF;}
+.disabledButton {background-color: #6c6c6c;}
+.buttonPlusMinus img {align-self: center; 
+                        justify-self: center;}
+.buttonPlus img {width:45%;
+                height:45%;}
+.buttonMinus img {width:40%;
+                 height:8%;}
+.buttonMinus {grid-column:2;}
+.buttonPlus {grid-column:6;}
+
+/*стили для orderAddServ*/
+@media (max-width:1199px) and (orientation:portrait) {.servGrid {height:11vmax;}
+                                                        #breakfast {grid-row:4;
+                                                                grid-column:2;}
+                                                        #lunch {grid-row:4;
+                                                                grid-column:4;}
+                                                        #dinner {grid-row:8;
+                                                                 grid-column:2;}
+                                                        #breakfast, #lunch, #dinner { grid-template-columns: 1fr 10% 20% 10%;}
+                                                        #blockFood {grid-template-rows:repeat(2,1fr);
+                                                                grid-template-columns: 3% 1fr 5% 1fr 3%;
+                                                                grid-template-rows: 3% 27% 5% 13% auto 27% 5% 13% 3%;} 
+                                                        .imgServ3 {grid-column:2;
+                                                                  grid-row:6;} 
+                                                        .imgServ2 {grid-column:4;}
+                                                        .imgServ3 {width:100%;
+                                                                height:90%;
+                                                                align-self: end;} } 
+@media (min-width:1200px) or ((max-width:1199px) and (orientation:landscape)) {.servGrid {height:8vmax;}
+#breakfast {grid-row:4;
+           grid-column:2;}
+#lunch {grid-row:4;
+        grid-column:3;}
+#dinner {grid-row:4;
+        grid-column:4;}
+#breakfast, #lunch, #dinner { grid-template-columns: 1fr 10% 15% 10%;}
+.imgServ3 {grid-column:4;
+        grid-row:2;}
+.imgServ2 {grid-column:3;} 
+.imgServ3 {width:100%;
+          height:100%;} }
+.headlineServName {grid-row:2;
+                   grid-column:2/4;
+                   font-size:1.5vmax;}
+.descriptionServ {grid-column:3;
+                grid-row:3;
+                max-width: 95%;}
+.switcher, .switcher2 {grid-row:2;
+                  grid-column:5;
+                   border-radius: 1.5vmax;
+                   border:0.15vmax solid #D9D9D9;
+                   width:6.5vmax;
+                   justify-self: end;
+                   align-self: center;
+                   height:2.5vmax;}
+.selection {grid-row:3;
+           grid-column:3/6;
+           display:grid;
+           justify-self: end;
+           grid-template-columns: 12% auto;
+           column-gap:15%;
+           align-items: center;
+           grid-template-rows: 100%;} 
+.switcherCircle, .switcherCircle2 {border-radius: 1000vmax;
+                                width:2vmax;
+                                height:2vmax;
+                                background-color: #D9D9D9;
+                                position:relative;
+                                top:10%;
+                                left:0.4vmax;}
+.selection img {width:100%;
+                height:auto;}
+.selection, .descriptionServ {color: #6c6c6c;
+                                font-size: 1.3vmax;}
+.servWrap {width:100%;
+           height:100%;
+           display:grid;
+           row-gap:10%;
+           grid-template-rows: 12% 1.2fr 1fr 12%;
+           font-family:"Inter";}
+@media (max-width:1199px) and (orientation:portrait) {.servWrap {grid-template-columns: 3% 2% auto 2% 13% 5%;}
+                                                        .headlineGridServ {height:7vmax;} }
+@media (min-width:1200px) or ((max-width:1199px) and (orientation:landscape)) {.servWrap {grid-template-columns: 3% 2% auto 2% 7% 5%;} 
+                                                                                .headlineGridServ {height:3.5vmax;}}
+.servPrice {grid-row:3;
+            grid-column:4/6;
+            align-self: center;
+            justify-self: end;
+            font-size: 1.6vmax;}
+.gridServDetails {height:5vmax;}
+.gridServDetails a {color:#6c6c6c;
+                  grid-column:2;
+                  width:max-content;
+                  font-family:"Inter";
+                  font-size:1.3vmax;} 
+.grid3Serv {width:100%;
+           height:80%;
+           column-gap:3%;
+           display:none;
+           grid-template-columns: 0.1% 1fr 1fr 1.1fr 0.1%;
+            grid-template-rows: 10% auto 5% 20% 10%;}
+.imgServ1, .imgServ2 {grid-row:2;
+                        width:100%;
+                        height:100%;}
+.imgServ1 {grid-column:2;}
+#breakfast, #lunch, #dinner {display:grid;
+                            row-gap:20%;
+                            grid-template-rows:1fr 1fr;
+                           font-size:1.5vmax;
+                           font-family:"Inter";}
+.foodRow1 {grid-column:1/span all;
+          grid-row:1;}
+.foodPrice {grid-row:2;
+            grid-column:1;
+            align-self: center;}
+.buttonMinusServ {grid-column:2;
+                grid-row:2;}
+.numServ {grid-column:3;
+        justify-self: center;
+        align-self: center;
+        grid-row:2;}
+.buttonPlusServ {grid-column:4;
+                grid-row:2;}
+.buttonPlusServ img {width:45%;
+                    height:45%;}
+.buttonMinusServ img {width:40%;
+                     height:8%;}
+
+/*стили для info*/
+.infoGrid {height:48vmax;}
+.infoBlock {background-color: white;
+           box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08);
+           border-radius: 1vmax;
+           font-family: "Inter";
+           grid-column:2;
+           display: grid;
+           grid-template-rows: 8% 1fr 5% 1.1fr 8%; }
+.infoRow1 {display: grid;
+           grid-row:2;
+           row-gap: 5%;
+           grid-template-rows: 1.2fr repeat(4, 1fr);
+           grid-template-columns: 6.5% 1fr; }
+.infoRow2 {display: grid;
+           grid-row:4;
+           row-gap: 5%;
+           grid-template-rows: 1.2fr repeat(5, 1fr);
+           grid-template-columns: 6.5% 1fr; }
+.col1 {grid-column: 2;}
+.infoRow1 > div:not(.headlineInfoBlock), .infoRow2 > div:not(.headlineInfoBlock) {color: #6c6c6c;
+                                                                                font-size: 1.2vmax;
+                                                                                grid-column: 2;}
+.headlineInfoBlock {font-size: 1.8vmax;
+                   grid-column: 1/span all;}
+.infoBlock a:hover {color:#2D4EFF;}
+@media (max-width:500px) {.infoBlock {grid-template-columns: 5% 1fr 5% 1fr 5%;}
+                         .col2 {grid-column:4;} }
+@media (min-width:501px) {.infoBlock {grid-template-columns: 5% 1fr 1fr 5%;} 
+                        .col2 {grid-column: 3;}  }
+
+/*стили для help*/
+#mainSpecial, .infoGrid:not(.infoInfo) {height:auto;}
+.chatBlock {overflow-y:scroll;
+            max-height:70vmax;
+            min-height: 0vmax;
+            height:max-content;
+            grid-column:2;
+            display:flex;
+            font-family: "Inter";
+            font-size:1.3vmax;
+            flex-direction: column;}
+.messageSupport {background-color: white;
+                border-radius: 1.2vmax 1.2vmax 1.2vmax 0vmax;}
+.messageCustomer {align-self: flex-end;
+                background-color: rgba(45,78,255,0.05);
+                border-radius: 1.2vmax 1.2vmax 0vmax 1.2vmax;}
+.messageCustomer, .messageSupport {height:max-content;
+                                  width:70%;
+                                  box-shadow: 0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08);
+                                  display:grid;
+                                  grid-template-columns: 5% 1fr 5%;}
+.voidMessage {height:2vmax;
+                width:100%;
+                grid-column: 2;}
+.voidBetweenMessage {min-height:3vmax;
+                    width:100%;}
+.textMessage {grid-column:2;
+                line-height: 170%;}
+#addVoid1, #addVoid2 {display:none;}
+.enterMessageGrid {height:5vmax;}
+.blockEnterMessage {grid-column:2;
+                   display:grid;
+                   grid-template-rows: 100%;}
+#inputMessage {grid-column:1/span all;
+                grid-row:1;}
+#inputMessage, #admSearchFlight {border-radius: 1vmax;
+                                color: #6c6c6c;
+                                font-size:1.3vmax;
+                                font-family: "Inter";
+                                padding-left: 3%;}
+#inputTypeFile {display:none;
+                grid-column:2;
+                grid-row:1;}
+#paperclip {grid-column:2;
+            grid-row:1;
+            align-self: center;
+            width:2vmax;
+            height:auto;}
+#sendMessage {grid-column:3;
+                grid-row:1;
+                align-self: center;
+                width:2vmax;
+                height:auto;}
+@media (max-width:480px) {.blockEnterMessage { grid-template-columns: 1fr 8% 8%;} 
+                          #inputMessage {padding-right: 18%;} }
+@media (min-width:481px) {.blockEnterMessage { grid-template-columns: 90% 5% 5%;} 
+                         #inputMessage {padding-right: 12%;} }
+
+/*навигация для загеристрированного пользователя*/                                                                            
+#exit {grid-column:6;
+        grid-row:1;
+        height:4vmax;
+        align-self:center;}
+.navNameUser {grid-column:8;
+              grid-row:1;
+              align-self:center;
+              font-family:"Inter";
+              font-size:1.3vmax;}
+.navImgUser {border-radius: 1000vmax;
+             height: 4.2vmax;
+             width: 4.2vmax;
+             align-self: center;
+             border: 0.1vmax solid #2D4EFF;
+             grid-row:1;
+             grid-column:10;
+             background-repeat: no-repeat;
+             background-size: cover;}
+.navImgUserAdmin {background-image: url("../images/free-icon-settings-19545201.png");}
+.navImgUserPuppy {background-image: url("../images/Pug-puppy-standing-in-profile-on-a-white-background\(1\)1-round2.png");}
+.navigationEnteredUser {grid-column:5;
+                        grid-row:1;
+                        width:60%;
+                        justify-self: center;
+                        align-items: center;
+                        justify-content: space-between;
+                        font-family: "Inter";
+                        font-size: 1.4vmax;}
+.logoEnteredUser {height:5vmax;
+                width:5vmax;
+                align-self:center;
+                grid-column:2;
+                grid-row:1;}
+#menuMobileEnteredUser {grid-column:12;
+                        width:100%;
+                        align-self:center;} 
+
+/*стили для admin*/
+.searchAndAddGrid {width:100%;
+                  display:grid;
+                  grid-template-columns: 8% 1fr 8%;
+                  grid-template-rows: 100%;}
+.admIcon {height:auto;
+        width:2.8vmax;}
+.searchAndAdd div, .backAndDelete div {font-family:"Mariupol";
+                                        font-size:2vmax;}
+#admSearchFlight {border: 0.1vmax solid #6c6c6c;
+                height:4vmax;
+                padding-right: 3%;}
+.searchHeadGrid {height:3vmax;}
+.searchHead {grid-template-rows: 100%; 
+            display:grid;
+            font-family: "Inter";
+            font-size:1.3vmax;
+            color:#6c6c6c;
+            grid-column:2;} 
+.resultSearch {display:grid;}
+.wrapResultSearch {width:96%;
+                  align-self: end;
+                  justify-self: center;
+                  display:grid; 
+                  font-family:"Inter"; }   
+.wrapResultSearch div:not(.code1, .code2) {font-size:1.4vmax;}  
+.wrapResultSearch img {grid-row:1;
+                      align-self:center;
+                      justify-self:center;
+                      width:2.5vmax;
+                      height:auto;}
+.voidSmall {height:2vmax;}
+.admIconSearch {height:auto;
+                width:3.5vmax;}
+
+/*медиа-запросы для навигации зарегистрированного пользователя и для admin*/
+@media (max-width:1199px) and (orientation:portrait) { .navigationEnteredUser {display:none;} 
+                                                        .navEnteredUser {grid-template-columns: 3% auto 1% 10% 1fr 17% 2% auto 2% auto 2% 4.5% 3%;
+                                                                         height:8vmax;}
+                                                        .searchAndAdd {grid-column:2;
+                                                                                display:grid; 
+                                                                                grid-template-columns: 12% 1fr 40% 12%;
+                                                                                grid-template-rows: 1fr 1fr;
+                                                                                row-gap:5%;
+                                                                                align-items: center;}
+                                                        #admSearchFlight {width:100%;
+                                                                          grid-column:2/span all;
+                                                                          box-sizing: border-box;}
+                                                        .searchAndAddGrid {height:13vmax;}
+                                                        #admAddFlightButton {grid-column:4;
+                                                                             grid-row:2;
+                                                                             justify-self: end;} 
+                                                        .searchAndAdd div {grid-column:3;
+                                                                           grid-row:2;
+                                                                          justify-self: end;} 
+                                                        #menuMobileEnteredUser {display: block;}
+                                                        .resultSearchGrid {height:15vmax;}
+                                                        .wrapResultSearch {height:92%;
+                                                                        grid-template-columns: 20% 20% 20% 15% 15% auto 10%;
+                                                                        grid-template-rows: auto;}
+                                                        .wrapResultSearch img {grid-column:6;}
+                                                        .searchHead {grid-template-columns: 20% 20% 20% 15% 15% auto 10%;}
+                                                        .searchHeadMobileNone {display:none;} } 
+@media (min-width:1200px) or ( (max-width:1199px) and (orientation:landscape) ) {.navigationEnteredUser {display:flex;} 
+                                                                                .navEnteredUser {grid-template-columns: 3% 5% 1% 10% 1fr 0.2fr 2% auto 2% 5% 3%;;
+                                                                                                 height:8vmax;} 
+                                                                                .searchAndAdd {grid-column:2;
+                                                                                                        display:grid; 
+                                                                                                        grid-template-columns: 8% 1fr 15% 20% 8%;
+                                                                                                        grid-template-rows: 100%;
+                                                                                                        align-items: center;}
+                                                                                .searchAndAddGrid {height:10vmax;}
+                                                                                #admAddFlightButton {grid-column:5;}
+                                                                                .searchAndAdd div {grid-column:4;} 
+                                                                                #menuMobileEnteredUser {display: none;} 
+                                                                                .resultSearchGrid {height:10vmax;} 
+                                                                                .wrapResultSearch {height:80%;
+                                                                                                grid-template-columns: repeat(8,1fr);
+                                                                                                grid-template-rows: 60% auto;}
+                                                                                .wrapResultSearch img {grid-column:8;} 
+                                                                                .searchHead {grid-template-columns: repeat(8,1fr);} }
+
+
+
+/*стили для orderFormPassengers*/
+           .contactGrid {height:12vmax;}
+           .personBlock, .contactBlock {display: grid;
+                         background-color: white;
+                         border-radius: 1.5vmax;
+                         box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08); 
+                         font-family: "Inter";
+                         grid-column: 2;}
+           
+            .personBlockCol1 {grid-column:2/4;}
+            .personType {font-size:2.5vmax;
+                         align-self:center;
+                         grid-row:2;}
+
+            .autoFillAndSaveBlock {color:#6c6c6c;
+                                   grid-column: 2/span all;
+                                   width:60%;
+                                   justify-self: end;
+                                   font-size: 1.3vmax;}
+            .radioBlock {grid-row:3;
+                         display:grid;
+                         grid-template-columns: 5% 20% 5% 1fr;
+                         grid-template-rows: 100%;
+                         column-gap:2%;}
+            .radioBlock * {grid-row:1;
+                           align-self:center;}
+            .radioBlock label {color: #6c6c6c;
+                               font-size:1.3vmax;}
+            .radioBlock > div {border-radius: 1000vmax;
+                             width:1.8vmax;
+                             height:1.8vmax;
+                             border:0.15vmax solid #6c6c6c;
+                             display:grid;
+                             align-items: center;
+                             justify-items: center;}
+            .radioBlock > div > div {border-radius: 1000vmax;
+                                     background-color: #6c6c6c;
+                                        width:1.3vmax;
+                                        height:1.3vmax;}
+            .documentType {width:50%;
+                         color:black;}
+            .contactWho {grid-row:3;
+                        width:100%;
+                        color:black;
+                        padding-left:8%;}
+                        
+                         
+            .contactTel, .labelTelContact {grid-row:3;}
+            .headlineSpecial {grid-column:2;}
+            .personName, .firstLabel {grid-row:4;}
+            .personSecondName, .secondLabel {grid-row:5;}
+            .personLastName, .thirdLabel  {grid-row:6;}
+            .dateOfBirth, .fourthLabel  {grid-row:7;}
+            .dateOfPass {width:50%;}
+            .codeDepartment {width:50%;}
+            .whoIssue { width:85%;}
+            .personBlock input, .documentType, .contactWho, .contactTel {border-radius:0.75vmax;
+                                font-weight: 500;
+                                background: transparent;
+                                font-family: "Inter";
+                                font-size:1.1vmax;
+                                box-sizing: border-box;
+                                border:0.1vmax solid #6c6c6c;
+                                height:85%;
+                               align-self: center;}
+            .personBlock input:not(.inputSpecialPaddin, .inputSpecialPaddin2), .documentType {padding-left: 5%;}
+            .inputSpecialPaddin, .sixthLabel {padding-left: 15%;}
+            .inputSpecialPaddin2, .seventhLabel {padding-left: 10%;}
+            .personBlock input {color:#6c6c6c;}
+            .labelJs, .labelDocument, .labelContact {font-family: "Inter";
+                                                    font-size: 1vmax;
+                                                    color:#6c6c6c;
+                                                    height:10%;
+                                                    width:100%;}
+            .labelJs:not(.sixthLabel, .seventhLabel, .labelTelContact), .labelDocument {margin-top: 1%;
+                                        margin-left: 5.1%;}
+            .sixthLabel, .seventhLabel {margin-top:1%;}
+            .labelJs {display:none;}
+            .passNoBlock {display: grid;
+                     column-gap: 5%;
+                     grid-template-columns: 30% 50%;
+                     grid-template-rows: 100%;}
+            .sixthLabel, .passS {grid-column:1;
+                                 grid-row:1;}
+            .seventhLabel, .passNo {grid-column:2;
+                                    grid-row:1;}
+            .circleRadio2 {display: none;}
+            .autoSave {display:grid;
+                      grid-template-columns: 1fr 28% 5%;
+                      grid-template-rows: 100%;}
+            .autoSave > div {grid-row:1;
+                             align-self: center;}
+            .autoSave > .switcher2 {grid-column:2;}
+            .autoFill {display: grid;
+                      grid-template-rows: 100%;
+                      align-items: center;
+                      column-gap:4%;}
+            .contactWho, .contactTel {height: 70%;}
+            .contactBlock {grid-template-rows: 0.1% repeat(2,1fr) 4%;}
+
+            @media (max-width:480px) {.personGrid {height:70vmax;} 
+                                        .documentType {padding-top: 4%;}}
+            @media (max-width:1199px) and (min-width:481px) and (orientation:portrait) {.personGrid {height:78vmax;}  
+                                                                                        .documentType {padding-top: 3.2%;} 
+                                                                                       .radioBlock {width:70%;} }
+            @media (max-width:1199px) and (orientation:portrait) {.specialMediaHeadlineGrid {height:9vmax;}
+                                                                    .personBlock {grid-template-rows: 0.1% repeat(11,1fr) 4%;
+                                                                        grid-template-columns: 5% 45% 1fr 5%;} 
+                                                                        .personBlock, .contactBlock {row-gap:2.5%;}
+                                                                       .autoFillAndSaveBlock {display: grid;
+                                                                                            grid-template-columns: 1fr;
+                                                                                            grid-row:2/4;
+                                                                                            width:42%;
+                                                                                            grid-template-rows: repeat(2,1fr);
+                                                                                            row-gap:8%;}     
+                                                                        .autoFill {grid-template-columns: 1fr 17%;}
+                                                                        .personBlockCol2,  .personBlockCol1 {grid-column:2/4;}
+                                                                        .documentType, .labelDocument {grid-row:8;} 
+                                                                        .passNoBlock {grid-row:9;}
+                                                                       .codeDepartment, .ninthLabel {grid-row:11;}
+                                                                       .dateOfPass, .eighthLabel {grid-row:10;}
+                                                                       .whoIssue, .tenthLabel {grid-row:12;} 
+                                                                       .personBlockCol2Contact {grid-column:6;}
+                                                                       .contactBlock {grid-template-columns: 5% 30% 7% 7% 1fr;}
+                                                                       .contactTel {padding-left: 5%;
+                                                                                    width:90%;}
+                                                                        .labelContact {grid-column:2;
+                                                                                       grid-row:3;}
+                                                                        .contactWho {padding-top: 12%;} 
+                                                                        .labelContact {margin-top: 9%;
+                                                                                         margin-left: 11%;}                            
+                                                                        .labelTelContact {margin-top: 5.5%;
+                                                                                        margin-left:5%;} 
+                                                                        #forMobileNoVoid {display:none;}
+                                                                        #forMobileNoVoid2 {display:none;}
+                                                                        #forMobileVoid {display:block;} 
+                                                                        .blockFill {width:95%;
+                                                                                    justify-self: end;} }
+            @media (min-width:1200px) or ((max-width:1199px) and (orientation:landscape)) {.specialMediaHeadlineGrid {height:5vmax;} 
+                                                                                            .personBlock {grid-template-rows: 0.1% repeat(6,1fr) 4%;
+                                                                                                grid-template-columns: 5% 38% 7% 7% 1fr;}
+                                                                                                .personGrid {height:40vmax;}
+                                                                                                .documentType {padding-top: 4%;}
+                                                                                                .personBlock, .contactBlock {row-gap:5%;} 
+                                                                                                .autoFillAndSaveBlock {display:grid;
+                                                                                                    grid-template-columns: repeat(2,1fr);
+                                                                                                    column-gap: 5%;
+                                                                                                    grid-template-rows: 100%;
+                                                                                                    grid-row:2;}
+                                                                                                .autoFill {grid-template-columns: 1fr 8%;}
+                                                                                                .documentType {grid-row:3;}
+                                                                                                .dateOfPass {grid-row:5;}
+                                                                                                .fifthLabel {grid-row:3;}
+                                                                                                .codeDepartment {grid-row:6;}
+                                                                                                .whoIssue {grid-row:7;}
+                                                                                                .eighthLabel {grid-row:5;}
+                                                                                                .ninthLabel {grid-row:6;}
+                                                                                                .tenthLabel {grid-row:7;}
+                                                                                                .personBlockCol2 {grid-column:5;}
+                                                                                                .passNoBlock {grid-row:4;} 
+                                                                                                .personBlockCol2Contact {grid-column:5/6;}
+                                                                                                .contactBlock {grid-template-columns: 5% 20% 5% 7% 1fr;}
+                                                                                                .contactTel {padding-left: 5%;
+                                                                                                             width:40%;}
+                                                                                                .contactWho {padding-top: 8%;} 
+                                                                                                .labelContact {margin-top: 4%;
+                                                                                                                margin-left: 8%;}                                                                                      
+                                                                                                .labelTelContact {margin-top: 1.5%;
+                                                                                                                margin-left:5%;}
+                                                                                                #forMobileVoid {display:none;}
+                                                                                                .blockFill {width:45%;} }
+.blockFill {display:none;}
+.blockFill {height:120%;
+            align-self:center;
+            border-radius: 0.5vmax;
+            background-color: #ffffff;
+            border:0.2vmax solid #2D4EFF;
+            grid-template-columns: 5% auto;
+            grid-template-rows: 100%;
+            align-items:center;}
+.blockFill > div {font-family: "Inter";
+                font-size:1.4vmax;
+                grid-column:2;}
+.firstAutoFill {grid-column:3/6;
+                 grid-row:3;}
+.secondAutoFill {grid-column:3/6;
+                grid-row:4;}
+#selectContact {grid-column:3;
+                grid-row:3;
+                height:0.8vmax;
+                justify-self: center;
+                align-self: center;
+                width: auto;}
+
+/*стил для adminFlightEdit*/
+.backAndDelete {grid-column:2;
+        display:grid; 
+        grid-template-rows: 100%;
+        align-items: center;}
+@media (max-width:1199px) and (orientation:portrait) {.backAndDelete {grid-template-columns: 45% 1fr 2% 5%;} }
+@media (min-width:1200px) or ( (max-width:1199px) and (orientation:landscape) ) {.backAndDelete {grid-template-columns: 25% 1fr 2% 5%;} }
+.backAndDelete img {grid-column:4;}
+.deleteFlightText {justify-self: end;}
+.formEditFlight input, .formEditFlight select {border-radius:0.5vmax;
+color: black;
+padding-left: 4%;
+border: 0.1vmax solid #6c6c6c;
+font-family: "Inter";
+font-size:1.1vmax;
+background: none;}
+.formEditFlight select {appearance: none;
+                    background-image: url("../images/selection.png");
+                    background-size: 1.3vmax;
+                    background-position: 95%;
+                    background-repeat: no-repeat;}
+.backAndDeleteGrid {height:7vmax;}
+.backEdit {display:grid;
+   align-items: center;
+   grid-template-rows: 100%;
+   grid-template-columns: 12% 1fr;}
+.backEdit div {color: #6c6c6c;
+       grid-column:2;
+    font-size:1.5vmax;
+      font-family:"Inter";}
+.backEdit svg {width:1.7vmax;
+      height:1.7vmax;}
+.gridEdit {display:grid;
+  grid-template-columns: 5% 1fr 5%;
+  grid-template-rows: 100%;}
+.headlineEditGrid {height:3.4vmax;}
+.headlineEditGrid > div {grid-column:2;
+                  font-family: "Inter";
+                 font-size:1.5vmax;}
+.inputSelect2Cols {display:grid;
+     grid-template-columns: 35% 10% 35% auto;
+     grid-template-rows:100%;}
+.inputAdmin {padding-top:5%;
+    grid-row:1;}
+.labelAdmin {grid-row:1;
+    margin-top: 1%;
+    margin-left: 4%;
+    font-family: "Inter";
+    font-size: 0.9vmax;
+    color:#6c6c6c;
+    height:10%;
+    width:100%;}
+.adminCol1 {grid-column:1;}
+.adminCol2 {grid-column:3;}
+
+.buttonSaveEditFlight {grid-column:2;
+                      justify-self: end;
+                      width:10vmax;}
+.conditions6ColumnsAdmin {display:grid;
+                          grid-column:2;
+                          width:100%;}
+.conditions6ColumnsAdmin input {width:100%;
+                                padding-left: 10%;
+                                padding-top:8%}
+.conditions6ColumnsAdmin label {margin-left:10%;
+                               margin-top:3%;}
+@media (max-width:1199px) and (orientation:portrait) {.conditions6ColumnsAdmin {grid-template-columns: repeat(3,1fr); 
+                                                                                grid-template-rows: repeat(2,1fr);
+                                                                                row-gap:10%;                      
+                                                                                column-gap:5%;} 
+                                                      .editGridForConditions {height:7vmax;} 
+                                                      .adminCol2Cond {grid-column:2;}
+                                                      .adminCol3 {grid-column:3;}
+                                                      .adminCol4 {grid-column:1;
+                                                                grid-row:2;}
+                                                      .adminCol5 {grid-column:2;
+                                                                grid-row:2;}
+                                                      .adminCol6 {grid-column:3;
+                                                                  grid-row:2;}}
+@media (min-width:1200px) or ( (max-width:1199px) and (orientation:landscape) ) {.conditions6ColumnsAdmin {grid-template-columns: repeat(5,1fr) 1.2fr; 
+                                                                                                          grid-template-rows: 100%;                                                          
+                                                                                                          column-gap:3%;}
+                                                                                .editGridForConditions {height:3.4vmax;}
+                                                                                .adminCol2Cond {grid-column:2;}
+                                                                                .adminCol3 {grid-column:3;}
+                                                                                .adminCol4 {grid-column:4;}
+                                                                                .adminCol5 {grid-column:5;}
+                                                                                .adminCol6 {grid-column:6;} }
+
+/*стили для account*/
+.gridAccount {display:grid;
+        height:23vmax;
+        grid-template-rows:100%;
+        grid-template-columns: 5% auto 30%;}
+.imgBackgroundAccount {grid-column:3;
+                 width:100%;
+                 height:100%;}
+.accHeaderBlock {grid-column:2;
+            display:grid;
+            column-gap: 8%;
+            grid-template-rows: 100%;}
+.imgAccHeader {border-radius: 1000vmax;
+          height:14vmax;
+          width:14vmax;
+          align-self: center;
+          border: 0.1vmax solid #2D4EFF;
+          grid-row:1/span all;}
+.nameAndNumberActiveOrders {align-self:center;
+                       height:50%;
+                       display:grid;
+                       grid-template-columns: 100%;
+                       grid-template-rows: auto;}
+.accNumberActiveOrders {font-size:1.5vmax;
+                   color:#6c6c6c;
+                   font-family: "Inter";}
+.accName {font-size: 5.8vmax;
+     font-family: "Mariupol";}
+.navigationAcc{grid-column:2;
+       font-family: "Inter";
+       font-size: 1.7vmax;}
+@media (max-width:900px) and (orientation:portrait) {.navigationAcc {width:100%;
+                                                               display:grid;
+                                                               grid-template-columns: repeat(2,1fr);
+                                                               column-gap: 8%;
+                                                               grid-template-rows: repeat(2,1fr);
+                                                               row-gap:5%;
+                                                               align-items: center;}
+                                                .navigationAcc > div {width:max-content;} 
+                                                #savedPassengersBlock {grid-row:1;
+                                                                   grid-column:2;}
+                                                 .imgBackgroundAccount {display:none;} 
+                                                 .accHeaderBlock {grid-template-columns: 50% auto;}
+                                                 .accNavGrid {height:10vmax;}
+                                                 .noForMobileAcc {display:none;}
+                                                 .basicInfoBlock > div:not(.specialMobileBasicBlock) { width:95%;
+                                                                                                   height:65%;}
+                                                  .buttonSave1 {width:50%;}
+                                                  .specialMobileBasicBlock {width:105%;
+                                                                           height:65%;} }
+@media (min-width:900px) or ((max-width:900px) and (orientation:landscape)) {.navigationAcc {width:75%;
+                                                                                       justify-content: space-between;
+                                                                                       display:flex;
+                                                                                       align-items: center;}
+                                                                       .accHeaderBlock {grid-template-columns: 20% auto;} 
+                                                                       .accNavGrid {height:7vmax;}
+                                                                     .basicInfoBlock > div { width:60%;
+                                                                                            height:65%;}
+                                                                       .buttonSave1 {width:35%;} }
+.basicInfoGrid {height:27vmax;}
+.basicInfoBlock {grid-column:2;
+            display:grid;
+            grid-template-columns: 5% repeat(2,1fr) 5%;
+           grid-template-rows: repeat(2,1fr) 25%;
+           align-items: center;
+           background-color: white;
+           border-radius:0.75vmax;
+           box-shadow:0.15vmax 0.15vmax 0.4vmax 0.1vmax rgba(0,0,0,0.08); }
+.basicInfoBlock > div {display:grid;
+                  grid-template-columns: 12% 1fr;
+                  column-gap:8%;
+                  grid-template-rows: repeat(2,1fr);
+                  row-gap:15%;}
+.basicCol1 {grid-column:2;}
+.basicCol2 {grid-column:3;}
+.basicInfoBlock input, .basicInfoBlock button:not(.buttonSave1) {border-radius:0.5vmax;
+                   font-weight: 500;
+                   background: transparent;
+                   color: #6c6c6c;
+                   font-family: "Inter";
+                   font-size:1.1vmax;
+                   width:100%;
+                   box-sizing: border-box;
+                   border:0.1vmax solid #6c6c6c;}
+.basicInfoBlock input {padding-left: 7%;}
+.basicInfoBlock img {align-self: center;}
+.imgBasicCol2 {height:auto;
+                width:2vmax;}
+.imgBasicCol1 {height:auto;
+                width:2.5vmax;}
+.accGrayText {color:#6c6c6c;
+         font-family: "Inter";
+         font-size: 1.5vmax;
+         grid-column:1/span all;}
+#file {display:none;}
+.buttonSave1 {grid-row:3;
+         grid-column:3;
+         justify-self: end;
+         height:50%;}
+.emptyGrid {height:8vmax;
+                display:none;}
+.empty {align-self: center;
+            justify-self: center;
+            font-family: "Inter";
+            font-size:1.2vmax;
+            color:#6c6c6c;
+            grid-column:2;}
