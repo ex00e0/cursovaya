@@ -1,66 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1"  charset='utf-8'>                           <!--мета-тег для распределения контента по ширине устройства и соответствия пикселей-->
-        <title>Помощь</title>
-        <link rel="stylesheet" href="../css/style.css">                                                  <!--подключение css-->
-    </head>
-    <body>
-            <nav>                                                                                         <!--навигация-->
-                <img src="../images/a11.png" id="logo" alt="логотип">
-                <div id="logoText">Мягкие <br> Авиалинии</div>
-                <div id="navigation">
-                    <div><a href="index.html" class="navBlue">Главная</a></div>
-                    <div> <a href="board.html" class="navBlue">Табло</a></div>
-                    <div><a href="info.html"  class="navBlue">Информация</a></div>
-                    <div id="curPage">
-                        <div id="blueLine"></div>
-                        <a href="help.html"  class="curHover">Помощь</a>
-                    </div>
-                </div>
-                <button id="enter" class="blueButton">Вход</button>
-                <button id="reg" class="blueButton">Регистрация</button>
-                <img src="../images/menu.png" id="menuMobile" alt="меню навигации">
-            </nav>
-            
-            <div id="navMobileShadow"></div>                                                        <!--тень для боковой навигации для мобильной версии-->
-            <div id="navMobile">                                                                    <!--меню боковой навигации для мобильной версии-->
-                    <img src="../images/plus4.png" id="close" alt="крестик">
-                    <div id="navMobileText">
-                        <div><a href="index.html">Главная</a></div>
-                        <div>
-                            <a href="board.html" class="curHover">Табло</a>
-                        </div>
-                        <div><a href="info.html">Информация</a></div>
-                        <div><a href="help.html">Помощь</a></div>
-                    </div>
-            </div>
-            
-            <div id="modalShadow"></div>                                                                   <!--тень для модального окна-->
-            <div id="modalEnter" class="modalRegEnter">                                                     <!--модальное окно входа-->
-                <img src="../images/plus2.png" id="closeEnter" class="closeEnterReg" alt="крестик">     
-                <div class="modal1">Вход</div>
-                <form id="formEnter">
-                    <input type="text" placeholder="Email или номер телефона" id="enterEmailTel" class="inputModal">
-                    <label class="labelModal" id="labelEnterEmailTel">Email или номер телефона</label>
-                    <input type="password" placeholder="Пароль" id="enterPass" class="inputModal">
-                    <label class="labelModal" id="labelEnterPass">Пароль</label>
-                    <button class="blueButton buttonEnterReg" id="buttonEnter">Войти</button>
-                </form>
-            </div>
-            <div id="modalReg" class="modalRegEnter">                                                                <!--модальное окно регистрации-->
-                <img src="../images/plus2.png" id="closeReg" class="closeEnterReg" alt="крестик">     
-                <div class="modal1">Регистрация</div>
-                <form id="formReg">
-                    <input type="text" placeholder="Имя" id="regName" class="inputModal">
-                    <label class="labelModal" id="labelRegName">Имя</label>
-                    <input type="text" placeholder="Email или номер телефона" id="regEmailTel" class="inputModal">
-                    <label class="labelModal" id="labelRegEmailTel">Email или номер телефона</label>
-                    <input type="text" placeholder="Придумайте пароль" id="regPass" class="inputModal">
-                    <label class="labelModal" id="labelRegPass">Пароль</label>
-                    <button class="blueButton buttonEnterReg">Зарегистрироваться</button>
-                </form>
-            </div>
+<?php require "header.php"; ?>
             <main>
             <section>                                                                              <!--блок чата со службой поддержки-->
                 <div class="voidCatalogueHalf"></div>
@@ -137,7 +75,7 @@
             <footer>                                                                       <!--футер с ссылками-->
                 <div id="footerCol1">
                     <div class="headlineFooter headline">Связь с нами</div>
-                    <a class="buttonFooter" id="buttonF1"  href="help.html">
+                    <a class="buttonFooter" id="buttonF1"  href="help.php">
                            <img src="../images/speech-bubble1.png" alt="сообщение" class="imgButtonFooter">                        
                     </a>
                     <a class="buttonFooter" id="buttonF2" href="tel:+79528123641">

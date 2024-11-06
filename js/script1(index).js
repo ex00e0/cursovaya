@@ -43,7 +43,7 @@ buttonSliderLeft.addEventListener("click", function () {if ((getTheStyle(slide1)
                                                                                                                             slide1.style.transition="none";
                                                                                                                             slide1.style.left="-100%";} }  );
 let learnMore = document.getElementsByClassName("buttonLearnMore");
-for (let b=0; b<learnMore.length; b++) {learnMore[b].addEventListener("click", function () {document.location = "info.html"} );}    //переход на другую страницу по клику
+for (let b=0; b<learnMore.length; b++) {learnMore[b].addEventListener("click", function () {document.location = "info.php"} );}    //переход на другую страницу по клику
 let buttonTriangle = document.getElementById("buttonTriangle");
 let checkTriangle = 0;
 buttonTriangle.addEventListener("click", function () {if (checkTriangle == 0) {document.getElementById("blockForSelectHeaderPassenger").style.display="grid";
@@ -65,7 +65,9 @@ buttonMinusAdult.addEventListener("click", function () {if (buttonMinusAdult.cla
                                                                                                              if (countAll==0 || countAll>4) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажиров`;}
                                                                                                                 else if (countAll==1) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажир`;}
                                                                                                                    else { document.getElementById("countPassengers").innerHTML=`${countAll} пассажира`;}
-                                                                                                             if (countAdults==0) {buttonMinusAdult.classList.add("disabledButton");
+                                                                                                                   document.getElementById('hidden_passengers_1').value = countAdults;
+                                                                                                                   document.getElementById('hidden_passengers_2').value = countChildren;
+                                                                                                             if (countAdults==1) {buttonMinusAdult.classList.add("disabledButton");
                                                                                                                                   buttonMinusAdult.classList.remove("activeButton");} } } );     
 buttonPlusAdult.addEventListener("click", function () {if (buttonPlusAdult.classList.contains('activeButton')) {countAdults++;
                                                                                                                 countAll++;
@@ -75,6 +77,8 @@ buttonPlusAdult.addEventListener("click", function () {if (buttonPlusAdult.class
                                                                                                            if (countAll==0 || countAll>4) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажиров`;}
                                                                                                               else if (countAll==1) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажир`;}
                                                                                                                  else { document.getElementById("countPassengers").innerHTML=`${countAll} пассажира`;}
+                                                                                                                 document.getElementById('hidden_passengers_1').value = countAdults;
+                                                                                                                   document.getElementById('hidden_passengers_2').value = countChildren;
                                                                                                            if (countAdults==5) {buttonPlusAdult.classList.add("disabledButton");
                                                                                                                                 buttonPlusAdult.classList.remove("activeButton");} } } );
 buttonMinusChildren.addEventListener("click", function () {if (buttonMinusChildren.classList.contains('activeButton')) {countChildren--;
@@ -85,6 +89,8 @@ buttonMinusChildren.addEventListener("click", function () {if (buttonMinusChildr
                                                                                                                                if (countAll==0 || countAll>4) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажиров`;}
                                                                                                                                   else if (countAll==1) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажир`;}
                                                                                                                                      else { document.getElementById("countPassengers").innerHTML=`${countAll} пассажира`;}
+                                                                                                                                     document.getElementById('hidden_passengers_1').value = countAdults;
+                                                                                                                                     document.getElementById('hidden_passengers_2').value = countChildren;
                                                                                                                                if (countChildren==0) {buttonMinusChildren.classList.add("disabledButton");
                                                                                                                                                     buttonMinusChildren.classList.remove("activeButton");} } } );
 buttonPlusChildren.addEventListener("click", function () {if (buttonPlusChildren.classList.contains('activeButton')) {countChildren++;
@@ -95,6 +101,8 @@ buttonPlusChildren.addEventListener("click", function () {if (buttonPlusChildren
                                                                                                                              if (countAll==0 || countAll>4) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажиров`;}
                                                                                                                                 else if (countAll==1) { document.getElementById("countPassengers").innerHTML=`${countAll} пассажир`;}
                                                                                                                                    else { document.getElementById("countPassengers").innerHTML=`${countAll} пассажира`;}
+                                                                                                                                   document.getElementById('hidden_passengers_1').value = countAdults;
+                                                                                                                                    document.getElementById('hidden_passengers_2').value = countChildren;
                                                                                                                              if (countChildren==5) {buttonPlusChildren.classList.add("disabledButton");
                                                                                                                                                   buttonPlusChildren.classList.remove("activeButton");} } } );
                         

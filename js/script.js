@@ -33,9 +33,13 @@ let navBlue = document.getElementsByClassName("navBlue");
                 
                 let inputs = document.getElementsByClassName("inputModal");
                 let labelsForInputs = document.getElementsByClassName("labelModal");
-                for (let i = 0; i < inputs.length; i++) {inputs[i].addEventListener("input", function () {inputs[i].style.paddingTop = "5%";
+                for (let i = 0; i < inputs.length; i++) {inputs[i].addEventListener("input", function () {
+                                                                                                      if (inputs[i].value != "") {inputs[i].style.paddingTop = "5%";
                                                                                                             labelsForInputs[i].style.display = "block";
-                                                                                                            inputs[i].style.color = "black";} );        }    //изменение стилей input при вводе текста так, чтобы сверху появлялся label, а сам текст немного опускался
+                                                                                                            inputs[i].style.color = "black";} 
+                                                                                                          else {inputs[i].style.paddingTop = "0%";
+                                                                                                          labelsForInputs[i].style.display = "none";
+                                                                                                          inputs[i].style.color = "#6c6c6c";} });        }    //изменение стилей input при вводе текста так, чтобы сверху появлялся label, а сам текст немного опускался
     
 
 

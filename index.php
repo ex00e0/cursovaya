@@ -1,3 +1,7 @@
+<?php session_start(); ?>
+<?php require "database/User.php"; 
+require "database/Flight.php";
+require "database/Service.php"; ?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -10,51 +14,88 @@
             <img src="../images/a4.png" id="imgSky" alt="картинка неба">
             <img src="../images/samolet1.png" id="imgAirplane" alt="самолет">
                 
-            <nav id="navInHeader">                                                              <!--навигация, соединенная с шапкой-->
+            <nav id="navInHeader"  <?php if (isset($_SESSION['user'])) { ?> class="navEnteredUser" <?php } ?>>                                                              <!--навигация, соединенная с шапкой-->
                <img src="../images/a11.png" id="logo" alt="логотип">
                <div id="logoText">Мягкие <br> Авиалинии</div>
                <div id="navigation">
                    <div id="curPage">
                        <div id="blueLine"></div>
-                       <a href="index.html" id="curHover">Главная</a>
+                       <a href="index.php" id="curHover">Главная</a>
                    </div>
-                   <div><a href="board.html" class="navBlue">Табло</a></div>
-                   <div><a href="info.html"  class="navBlue">Информация</a></div>
-                   <div><a href="help.html"  class="navBlue">Помощь</a></div>
+                   <div><a href="board.php" class="navBlue">Табло рейсов</a></div>
+                   <div><a href="info.php"  class="navBlue">Информация</a></div>
+                   <!-- <div><a href="help.php"  class="navBlue">Помощь</a></div> -->
                </div>
+               <?php if (isset($_SESSION['user'])) {
+                $user = new User;
+                $user = $user -> getInfoForHeader($_SESSION['user']);
+                ?>
+                <a href="user/exit.php" id="exit" class="blueButton">Выйти</a>
+                <a href="account.php" class="navNameUser"><?=$user['name']?></a>
+                <a href="account.php" class="navImgUser"> <img src="/images/users/<?=$user['img']?>" ></a>
+                <?php } else { ?>
                <button id="enter" class="blueButton">Вход</button>
                <button id="reg" class="blueButton">Регистрация</button>
-               <img src="../images/menu.png" id="menuMobile" alt="меню навигации">
+               <?php } ?>
+               <img src="../images/menu.png" <?php if (isset($_SESSION['user'])) { ?> id="menuMobileEnteredUser" <?php } else { ?> id="menuMobile" <?php } ?> alt="меню навигации">
            </nav>
              <section id="searchBlock">                                                          <!--блок формы для поиска рейса-->
                 <h1 id="headlineHeader">Готовы отправиться <br>
                     в путешествие?</h1>
-                <form id="formHeader" action="catalogue.html">
-                    <label class="labelHeader">Туда</label>
-                    <input type="date" id="inputThere" value="2023-07-22" class="inputSelectHeader">
-                    <label id="labelBack" class="labelHeader">Обратно</label>
-                    <input type="date" id="inputBack" value="2023-07-22" class="inputSelectHeader">
+                <form id="formHeader" action="catalogue.php" method="get">
+                    <label class="labelHeader">Вылет</label>
+                    <input type="date" id="inputThere" value="<?=date('Y-m-d')?>" class="inputSelectHeader" min="<?=date('Y-m-d')?>" max="<?php
+                    $date = date_create();
+                    date_modify($date, "+1 year"); 
+                    $date_new = date_format($date, "Y-m-d");
+                    echo $date_new;
+                    ?>" name="there" required>
+                    <label id="labelBack" class="labelHeader">Прилет</label>
+                    <input type="date" id="inputBack" value="<?php $datetime = new DateTime('tomorrow'); echo $datetime->format('Y-m-d');?>" class="inputSelectHeader" min="<?=date('Y-m-d')?>" max="<?php
+                    $date = date_create();
+                    date_modify($date, "+1 year"); 
+                    $date_new = date_format($date, "Y-m-d");
+                    echo $date_new;
+                    ?>" name="back" required>
                     <label id="labelFrom" class="labelHeader">Откуда</label>
-                    <select id="selectFrom" class="inputSelectHeader selectHeader">
-                        <option class="optionHeader">Уфа</option>
-                        <option class="optionHeader">Казань</option>
+                    <select id="selectFrom" class="inputSelectHeader selectHeader" name="from">
+                        <?php
+                        $directions = new Flight;
+                        $directions = $directions -> getAllDirections();
+                        foreach ($directions as $direction) {
+                        ?>
+                        <option class="optionHeader" value="<?=$direction[0]?>"><?=$direction[1]." (".$direction[2].")"?></option>
+                        <?php
+                        }
+                        ?>
+                        <!-- <option class="optionHeader" value="Уфа">Уфа</option>
+                        <option class="optionHeader" value="Казань">Казань</option> -->
                     </select>
                     <label id="labelTo" class="labelHeader">Куда</label>
-                    <select id="selectTo" class="inputSelectHeader selectHeader">
-                        <option class="optionHeader">Нижний Новгород</option>
-                        <option class="optionHeader">Москва</option>
+                    <select id="selectTo" class="inputSelectHeader selectHeader" name="to">
+                        <?php
+                            $directions = new Flight;
+                            $directions = $directions -> getAllDirections();
+                            foreach ($directions as $direction) {
+                            ?>
+                            <option class="optionHeader" value="<?=$direction[0]?>"><?=$direction[1]." (".$direction[2].")"?></option>
+                            <?php
+                            }
+                            ?>
                     </select>
                     <label id="labelPassenger" class="labelHeader">Количество пассажиров</label>
                     <div class="selectHeaderPassenger">
                         <div id="countPassengers">1 пассажир</div>
                         <img src="../images/Polygon1.png" alt="треугольник" id="buttonTriangle">
                     </div>
+                    <input type="hidden" id="hidden_passengers_1" value="1" name="adults">
+                    <input type="hidden" id="hidden_passengers_2" value="0" name="children">
                     <button id="buttonHeader" class="blueButton">Отправиться в путешествие</button>
                     <div id="blockForSelectHeaderPassenger">
                         <div id="adultBlock">
                             <div class="passengerCategory">Взрослые</div>
                             <div class="passengerDescription">старше 14 лет</div>
-                            <div class="buttonMinus buttonPlusMinus activeButton" id="buttonMinusAdult">
+                            <div class="buttonMinus buttonPlusMinus disabledButton" id="buttonMinusAdult">
                                 <img src="../images/minusPassenger.png" alt="минус">
                             </div>
                             <div class="passengerNumber" id="adultNum">1</div>
@@ -106,6 +147,7 @@
         </div>
          <div class="void2X"></div>
     <section>
+        <?php ?>
         <div class="grid gridMainServ">                                                                            <!--блок дополнительных услуг с заголовком-->
             <div class="headlineMainServBlock">
                 <h1 class="headlineBigger headlineMainServ">Наши дополнительные услуги</h1>
@@ -120,27 +162,76 @@
         <div class="voidCatalogue"></div>
         <div class="grid gridThreeColServ">
             <div class="servBlockMain">
+                <?php
+                $services = new Service;
+                $services = $services -> getServicesAdmin(false);
+                if ($services != null) {
+                ?>
                 <div class="servCol">
-                    <img src="../images/surgery1(1).png" class="servBlockRow1" alt="Питомец">
-                    <div class="servBlockRow2">Перевозка питомца</div>
-                    <div class="servBlockRow3">Путешествуйте вместе со своим питомцем</div>
-                    <div class="servBlockRow4">от 2500 руб.</div>
+                    <img src="/images/services/<?=$services[0][4]?>" class="servBlockRow1" alt="Питомец">
+                    <div class="servBlockRow2"><?=$services[0][2]?></div>
+                    <div class="servBlockRow3"><?=$services[0][3]?></div>
+                    <div class="servBlockRow4">
+                        <?php
+                        if ($services[0][1] == null) {
+                            $price = (array) json_decode($services[0][5]);
+                            foreach ($price as $pr) {
+                                echo "от ".$pr." руб.";
+                                break;
+                            }
+                           
+                        }
+                        else {
+                            echo $services[0][1]." руб.";
+                        }
+                        ?></div>
                     <button class="buttonLearnMore blueButton">Узнать больше...</button>
                  </div>
                  <div class="servCol">
-                    <img src="../images/business-class-air-astana1(2).png" class="servBlockRow1" alt="Питание">
-                    <div class="servBlockRow2">Питание на выбор</div>
-                    <div class="servBlockRow3">Не забудьте заказать питание на борт</div>
-                    <div class="servBlockRow4">от 500 руб.</div>
+                    <img src="/images/<?=$services[1][4]?>" class="servBlockRow1" alt="Питание">
+                    <div class="servBlockRow2" id="longText"><?=$services[1][2]?></div>
+                    <div class="servBlockRow3"><?=$services[1][3]?></div>
+                    <div class="servBlockRow4">
+                    <?php
+                        if ($services[1][1] == null) {
+                            $price = (array) json_decode($services[1][5]);
+                            foreach ($price as $pr) {
+                                echo "от ".$pr." руб.";
+                                break;
+                            }
+                           
+                        }
+                        else {
+                            echo $services[1][1]." руб.";
+                        }
+                        ?>
+                    </div>
                     <button class="buttonLearnMore blueButton">Узнать больше...</button>
                  </div>
                  <div class="servCol">
-                    <img src="../images/Baggage_Allowance1(2).png" class="servBlockRow1" alt="Багаж">
-                    <div class="servBlockRow2" id="longText">Дополнительный багаж</div>
-                    <div class="servBlockRow3">Добавьте дополнительные кг к вашему багажу</div>
-                    <div class="servBlockRow4">от 4000 руб.</div>
+                    <img src="/images/<?=$services[2][4]?>" class="servBlockRow1" alt="Багаж">
+                    <div class="servBlockRow2" ><?=$services[2][2]?></div>
+                    <div class="servBlockRow3"><?=$services[2][3]?></div>
+                    <div class="servBlockRow4">
+                    <?php
+                        if ($services[2][1] == null) {
+                            $price = (array) json_decode($services[2][5]);
+                            foreach ($price as $pr) {
+                                echo "от ".$pr." руб.";
+                                break;
+                            }
+                           
+                        }
+                        else {
+                            echo $services[2][1]." руб.";
+                        }
+                        ?>
+                    </div>
                     <button class="buttonLearnMore blueButton">Узнать больше...</button>
                  </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </section>
@@ -148,12 +239,12 @@
      <div id="navMobile">                                                                     <!--меню боковой навигации для мобильной версии-->
         <img src="../images/plus4.png" id="close" alt="крестик">
              <div id="navMobileText">
-                 <div><a href="index.html">Главная</a></div>
+                 <div><a href="index.php">Главная</a></div>
                  <div>
-                     <a href="board.html">Табло</a>
+                     <a href="board.php">Табло</a>
                  </div>
-                 <div><a href="info.html">Информация</a></div>
-                 <div><a href="help.html">Помощь</a></div>
+                 <div><a href="info.php">Информация</a></div>
+                 <div><a href="help.php">Помощь</a></div>
              </div>
      </div>
      
@@ -161,69 +252,61 @@
      <div id="modalEnter" class="modalRegEnter">                                                         <!--модальное окно входа-->
          <img src="../images/plus2.png" id="closeEnter" class="closeEnterReg" alt="крестик">     
          <div class="modal1">Вход</div>
-         <form id="formEnter">
-             <input type="text" placeholder="Email или номер телефона" id="enterEmailTel" class="inputModal">
+         <form id="formEnter" action="user/auth.php" method="post">
+             <input type="text" placeholder="Email или номер телефона" id="enterEmailTel" class="inputModal" name="phoneEmail" required>
              <label class="labelModal" id="labelEnterEmailTel">Email или номер телефона</label>
-             <input type="password" placeholder="Пароль" id="enterPass" class="inputModal">
+             <div id="messPhoneEmail-auth"></div>
+             <input type="password" placeholder="Пароль" id="enterPass" class="inputModal" name="pass" required>
              <label class="labelModal" id="labelEnterPass">Пароль</label>
+             <div id="messPass-auth"></div>
              <button class="blueButton buttonEnterReg" id="buttonEnter">Войти</button>
          </form>
      </div>
      <div id="modalReg" class="modalRegEnter">                                                                     <!--модальное окно регистрации-->
          <img src="../images/plus2.png" id="closeReg" class="closeEnterReg" alt="крестик">     
          <div class="modal1">Регистрация</div>
-         <form id="formReg">
-             <input type="text" placeholder="Имя" id="regName" class="inputModal">
+         <form id="formReg" action="user/reg.php" method="post">
+             <input type="text" placeholder="Имя" id="regName" class="inputModal" name="name" required>
              <label class="labelModal" id="labelRegName">Имя</label>
-             <input type="text" placeholder="Email или номер телефона" id="regEmailTel" class="inputModal">
+             <div id="messName"></div>
+             <input type="text" placeholder="Email или номер телефона" id="regEmailTel" class="inputModal" name="phoneEmail" required>
              <label class="labelModal" id="labelRegEmailTel">Email или номер телефона</label>
-             <input type="text" placeholder="Придумайте пароль" id="regPass" class="inputModal">
+             <div id="messPhoneEmail"></div>
+             <input type="text" placeholder="Придумайте пароль" id="regPass" class="inputModal" name="pass" required>
              <label class="labelModal" id="labelRegPass">Пароль</label>
+             <div id="messPass"></div>
              <button class="blueButton buttonEnterReg">Зарегистрироваться</button>
          </form>
      </div>
          <div class="void"></div>
-            <footer>                                                                                                   <!--футер с ссылками-->
-                <div id="footerCol1">
-                    <div class="headlineFooter headline">Связь с нами</div>
-                    <a class="buttonFooter" id="buttonF1" href="help.html">
-                           <img src="../images/speech-bubble1.png" alt="сообщение" class="imgButtonFooter">                        
-                    </a>
-                    <a class="buttonFooter" id="buttonF2" href="tel:+79528123641">
-                        <img src="../images/phone-call1.png" alt="звонок" class="imgButtonFooter">              
-                    </a>
-                    <a class="buttonFooter" id="buttonF3" href="https://t.me/trapbed">
-                        <img src="../images/telegram1.png" alt="телеграм" class="imgButtonFooter">                        
-                    </a>
-                    <div id="buttonFooterText1">Служба поддержки</div>
-                    <div id="buttonFooterText2">Звонок</div>
-                    <div id="buttonFooterText3">Телеграм</div>
-                </div>
-                <img src="../images/Group2.png" alt="градиент">
-                <div class="footerPart" id="footerCol2">
-                    <div class="headline headlineFooter">О компании</div>
-                    <div class="footerPartRow4"><a href="">Общая информация</a></div>
-                    <div class="footerPartRow5"><a href="">Лицензии</a></div>
-                    <div class="footerPartRow6"><a href="">Правила</a></div>
-                </div>
-                <img src="../images/Group2.png" alt="градиент" id="gradMobileNone">
-                <div class="footerPart" id="footerCol3">
-                    <div class="headline headlineFooter">О рейсах</div>
-                    <div class="footerPartRow4"><a href="">Табло с рейсами</a></div>
-                    <div class="footerPartRow5"><a href="">Классы</a></div>
-                    <div class="footerPartRow6"><a href="">Дополнительные услуги</a></div>
-                    <div class="footerPartRow7"><a href="">Направления</a></div>
-                </div>
-                <img src="../images/Group2.png" alt="градиент">
-                <div class="footerPart" id="footerCol4">
-                    <div class="headline headlineFooter">Офисы</div>
-                    <div class="footerPartRow4"><a href="">Главный офис</a></div>
-                    <div class="footerPartRow5"><a href="">Офис в Уфе</a></div>
-                    <div class="footerPartRow6"><a href="">Офис в Екатеринбурге</a></div>
-                    <div class="footerPartRow7"><a href="">Офис в Нижнем Новгороде</a></div>
-                </div>
-            </footer>
+<?php require "footer.php"; ?>
         <script src="../js/script.js"> </script>                                                           <!--подключение javascript-->
         <script src="../js/script1(index).js"> </script>
+        <?php
+         if (isset($_SESSION['mess'])) {
+            if (isset($_SESSION['mess']['name'])) {
+                echo "<script> document.getElementById('messName').innerHTML = '".$_SESSION['mess']['name']."'; </script>";
+                echo "<script src='js/mess_reg_auth/mess1.js'></script>";
+            }
+            if (isset($_SESSION['mess']['phoneEmail'])) {
+                echo "<script> document.getElementById('messPhoneEmail').innerHTML = '".$_SESSION['mess']['phoneEmail']."'; </script>";
+                echo "<script src='js/mess_reg_auth/mess2.js'></script>";
+            }
+            if (isset($_SESSION['mess']['pass'])) {
+                echo "<script> document.getElementById('messPass').innerHTML = '".$_SESSION['mess']['pass']."'; </script>";
+                echo "<script src='js/mess_reg_auth/mess3.js'></script>";
+            }
+            if (isset($_SESSION['mess']['pass-auth'])) {
+                echo "<script> document.getElementById('messPass-auth').innerHTML = '".$_SESSION['mess']['pass-auth']."'; </script>";
+                echo "<script src='js/mess_reg_auth/mess5.js'></script>";
+            }
+            if (isset($_SESSION['mess']['phoneEmail-auth'])) {
+                echo "<script> document.getElementById('messPhoneEmail-auth').innerHTML = '".$_SESSION['mess']['phoneEmail-auth']."'; </script>";
+                echo "<script src='js/mess_reg_auth/mess4.js'></script>";
+            }
+            unset($_SESSION['mess']);
+         }
+         
+         ?>
     </body>
 </html>

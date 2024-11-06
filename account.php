@@ -1,47 +1,33 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" charset='utf-8'>        <!--мета-тег для распределения контента по ширине устройства и соответствия пикселей-->      
-        <link rel="stylesheet" href="../css/style.css">                                  <!--подключение css-->
-        <title>Аккаунт</title>
-    </head>
-    <body>
-     <div id="navMobileShadow"></div>                                <!--тень для боковой навигации для мобильной версии-->
-     <div id="navMobile">                                             <!--меню боковой навигации для мобильной версии-->
-        <img src="../images/plus4.png" id="close" alt="крестик">
-             <div id="navMobileText">
-                 <div><a href="index.html">Главная</a></div>
-                 <div>
-                     <a href="board.html">Табло</a>
-                 </div>
-                 <div><a href="info.html">Информация</a></div>
-                 <div><a href="help.html">Помощь</a></div>
-             </div>
-     </div>
-
-        <nav class="navEnteredUser">                                                       <!--навигация-->
-            <img src="../images/a11.png" class="logoEnteredUser" alt="логотип">
-            <div id="logoText">Мягкие <br> Авиалинии</div>
-            <div class="navigationEnteredUser">
-                <div>
-                    <a href="index.html" class="noNavPage">Главная</a>
-                </div>
-                <div><a href="board.html" class="noNavPage">Табло</a></div>
-                <div><a href="info.html"  class="noNavPage">Информация</a></div>
-                <div><a href="help.html"  class="noNavPage">Помощь</a></div>
-            </div>
-            <button id="exit" class="blueButton">Выйти</button>
-            <div class="navNameUser">Puppy</div>
-            <div class="navImgUser navImgUserPuppy"></div>
-            <img src="../images/menu.png" id="menuMobileEnteredUser" alt="меню навигации">
-        </nav>
+<?php session_start(); 
+      if (!isset($_SESSION['user'])) {
+        header("Location: /");
+      } 
+?>
+<?php require "header.php"; ?>
         <div class="voidCatalogue noForMobileAcc"></div>
        <header class="gridAccount">                                                                                 <!--шапка с именем, фото профиля и количеством активных заказов-->
              <div class="accHeaderBlock">
-                <img src="../images/Pug-puppy-standing-in-profile-on-a-white-background(1)1-round2.png" alt="фото аккаунта" class="imgAccHeader">
+                <img src="/images/users/<?=$user['img']?>" alt="фото аккаунта" class="imgAccHeader">
                 <div class="nameAndNumberActiveOrders">
-                    <div class="accName">Puppy</div>
-                    <div class="accNumberActiveOrders">0 активных заказов</div>
+                    <div class="accName"><?=$user['name']?></div>
+                    <div class="accNumberActiveOrders">
+                        <?php
+                        $number_of_orders = new User;
+                        $number_of_orders = $number_of_orders -> getNumberOfOrders();
+                        if (substr($number_of_orders, -1) == 1 and mb_strlen($number_of_orders)==1) {
+                            $letter = '';
+                            $letter_1 = 'й';
+                        }
+                        else if ((substr($number_of_orders, -1) == 2 and substr($number_of_orders, 0, 1) != 1) || (substr($number_of_orders, -1) == 3 and substr($number_of_orders, 0, 1) != 1) || (substr($number_of_orders, -1) == 4 and substr($number_of_orders, 0, 1) != 1)) {
+                            $letter = 'а';
+                            $letter_1 = 'х';
+                        }
+                        else {
+                            $letter = 'ов';
+                            $letter_1 = 'х';
+                        }
+                        echo $number_of_orders;
+                        ?> активны<?=$letter_1?> заказ<?=$letter?></div>
                 </div>
              </div>
              <img src="../images/foncrug1.png" alt="небо сбоку" class="imgBackgroundAccount">
@@ -53,34 +39,50 @@
                         <div class="blueLine"></div>
                         <a id="curHover">Профиль</a>
                     </div>
-                    <div id="allOrders"><a class="navBlue">Все заказы</a></div>
-                    <div><a class="navBlue" id="activeOrders">Активные заказы</a></div>
-                    <div id="savedPassengersBlock"><a class="navBlue" id="savedPassengers">Сохраненные пассажиры</a></div>
+                    <div id="allOrders">
+                        <!-- <div class="blueLine"></div> -->
+                        <a class="navBlue" href="unactive_orders.php">Неактивные заказы</a>
+                    </div>
+                    <div>
+                        <!-- <div class="blueLine"></div> -->
+                        <a class="navBlue" id="activeOrders" href="active_orders.php">Активные заказы</a>
+                    </div>
+                    <!-- <div id="savedPassengersBlock"><a class="navBlue" id="savedPassengers">Сохраненные пассажиры</a></div> -->
                 </div>
            </div>
            <div class="grid basicInfoGrid" id="profile1">                                          <!--блок с изменением основной информации профиля-->
-               <form class="basicInfoBlock">
+               <form class="basicInfoBlock" action="user/account.php" method="post"  enctype="multipart/form-data">
                    <div class="basicCol1">
                        <div class="accGrayText">Изменить фото профиля</div>
                        <img src="../images/camera1.png" alt="фото" class="imgBasicCol1">
-                       <input type="file" id="file">
-                       <button onclick="file.click()">Загрузить..</button>
+                       <input type="file" id="file" name="image">
+                       <div onclick="file.click()" class="buttonFileAcc" id="inputAcc-image">Загрузить..</div>
+                       <div class="messAcc" id="messAcc-image"></div>
                    </div>
                    <div class="basicCol2">
                         <div class="accGrayText">Изменить имя профиля</div>
                         <img src="../images/edit.png" alt="редактирование" class="imgBasicCol2" >
-                        <input type="text" placeholder="Введите имя..">
+                        <input type="text" placeholder="Введите имя.." value="<?=$user['name']?>" name="name" id="inputAcc-name">
+                        <div class="messAcc" id="messAcc-name"></div>
                     </div>
                     <div class="basicCol1">
                         <div class="accGrayText">Изменить email</div>
                         <img src="../images/email.png" alt="email" class="imgBasicCol1">
-                        <input type="email"  placeholder="Введите email..">
+                        <input type="email"  placeholder="Введите email.." value="<?=$user['email']?>" name="email" id="inputAcc-email">
+                        <div class="messAcc" id="messAcc-email"></div>
                     </div>
                     <div class="basicCol2 specialMobileBasicBlock">
                         <div class="accGrayText">Изменить номер телефона</div>
                         <img src="../images/phone-call3.png" alt="телефон" class="imgBasicCol2">
-                        <input type="tel" placeholder="Введите номер телефона..">
+                        <input type="tel" placeholder="Введите номер телефона.." value="<?=$user['phone']?>" name="phone" id="inputAcc-phone">
+                        <div class="messAcc" id="messAcc-phone"></div>
                     </div>
+                    <div class="basicCol1">
+                       <div class="accGrayText">Изменить пароль</div>
+                       <img src="../images/lock.png" alt="пароль" class="imgBasicCol1">
+                       <input type="text" name="pass" value="<?=$user['pass']?>"  id="inputAcc-pass">
+                       <div class="messAcc" id="messAcc-pass"></div>
+                   </div>
                     <button class="blueButton buttonSave1">Сохранить</button>
                 </form>
            </div>
@@ -114,47 +116,51 @@
         </form>
     </div>
          <div class="void"></div>
-            <footer>                                                                                                <!--футер с ссылками-->
-                <div id="footerCol1">
-                    <div class="headlineFooter headline">Связь с нами</div>
-                    <a class="buttonFooter" id="buttonF1" href="help.html">
-                           <img src="../images/speech-bubble1.png" alt="сообщение" class="imgButtonFooter">                        
-                    </a>
-                    <a class="buttonFooter" id="buttonF2" href="tel:+79528123641">
-                        <img src="../images/phone-call1.png" alt="звонок" class="imgButtonFooter">              
-                    </a>
-                    <a class="buttonFooter" id="buttonF3" href="https://t.me/trapbed">
-                        <img src="../images/telegram1.png" alt="телеграм" class="imgButtonFooter">                        
-                    </a>
-                    <div id="buttonFooterText1">Служба поддержки</div>
-                    <div id="buttonFooterText2">Звонок</div>
-                    <div id="buttonFooterText3">Телеграм</div>
-                </div>
-                <img src="../images/Group2.png" alt="градиент">
-                <div class="footerPart" id="footerCol2">
-                    <div class="headline headlineFooter">О компании</div>
-                    <div class="footerPartRow4"><a href="">Общая информация</a></div>
-                    <div class="footerPartRow5"><a href="">Лицензии</a></div>
-                    <div class="footerPartRow6"><a href="">Правила</a></div>
-                </div>
-                <img src="../images/Group2.png" alt="градиент" id="gradMobileNone">
-                <div class="footerPart" id="footerCol3">
-                    <div class="headline headlineFooter">О рейсах</div>
-                    <div class="footerPartRow4"><a href="">Табло с рейсами</a></div>
-                    <div class="footerPartRow5"><a href="">Классы</a></div>
-                    <div class="footerPartRow6"><a href="">Дополнительные услуги</a></div>
-                    <div class="footerPartRow7"><a href="">Направления</a></div>
-                </div>
-                <img src="../images/Group2.png" alt="градиент">
-                <div class="footerPart" id="footerCol4">
-                    <div class="headline headlineFooter">Офисы</div>
-                    <div class="footerPartRow4"><a href="">Главный офис</a></div>
-                    <div class="footerPartRow5"><a href="">Офис в Уфе</a></div>
-                    <div class="footerPartRow6"><a href="">Офис в Екатеринбурге</a></div>
-                    <div class="footerPartRow7"><a href="">Офис в Нижнем Новгороде</a></div>
-                </div>
-            </footer>
+        <?php require "footer.php"; ?>
+
+<div id="sideMess">
+    <div id="sideMessText">Допустим, это сообщение?</div>
+    <img src="/images/plus4.png" id="closeMess">
+</div>
         <script src="../js/script7(account).js"></script>                                <!--подключение javascript-->
         <script src="../js/script9(admin).js"></script>
+        <?php
+         if (isset($_SESSION['mess'])) {
+            if (isset($_SESSION['mess']['done'])) {
+                echo "<script> document.getElementById('sideMessText').innerHTML = '".$_SESSION['mess']['done']."'; </script>";
+                echo "<script src='/js/sideMess.js'></script>";
+            }
+            if (isset($_SESSION['mess']['edit'])) {
+                echo "<script> document.getElementById('sideMessText').innerHTML = '".$_SESSION['mess']['edit']."'; </script>";
+                echo "<script src='/js/sideMess.js'></script>";
+            }
+            if (isset($_SESSION['mess']['image'])) {
+                echo "<script> document.getElementById('messAcc-image').innerHTML = '".$_SESSION['mess']['image']."'; </script>";
+                echo "<script src='/js/mess_account/mess1.js'></script>";
+            }
+            if (isset($_SESSION['mess']['name'])) {
+                echo "<script> document.getElementById('messAcc-name').innerHTML = '".$_SESSION['mess']['name']."'; </script>";
+                echo "<script src='/js/mess_account/mess2.js'></script>";
+            }
+            if (isset($_SESSION['mess']['email'])) {
+                echo "<script> document.getElementById('messAcc-email').innerHTML = '".$_SESSION['mess']['email']."'; </script>";
+                echo "<script src='/js/mess_account/mess3.js'></script>";
+            }
+            if (isset($_SESSION['mess']['phone'])) {
+                echo "<script> document.getElementById('messAcc-phone').innerHTML = '".$_SESSION['mess']['phone']."'; </script>";
+                echo "<script src='/js/mess_account/mess4.js'></script>";
+            }
+            if (isset($_SESSION['mess']['pass'])) {
+                echo "<script> document.getElementById('messAcc-pass').innerHTML = '".$_SESSION['mess']['pass']."'; </script>";
+                echo "<script src='/js/mess_account/mess5.js'></script>";
+            }
+            if (isset($_SESSION['mess']['email_order'])) {
+                echo "<script> document.getElementById('sideMessText').innerHTML = '".$_SESSION['mess']['email_order']."';
+                document.getElementById('sideMess').width = '45vmax'; </script>";
+                echo "<script src='/js/sideMess.js'></script>";
+            }
+            unset($_SESSION['mess']);
+         }
+         ?>
     </body>
 </html>

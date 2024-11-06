@@ -12,4 +12,4 @@ let close=document.getElementById("close");
                                                              document.body.style.overflow="auto"; 
                                                              document.body.style.height="auto";  } );    //закрытие бокового меню при клике на крестик в мобильной версии
 let editButtons = document.getElementsByClassName("editButtons");
-for (let ed=0;ed<editButtons.length;ed++) {editButtons[ed].addEventListener("click", function () {document.location='adminFlightEdit.html';} );}     //перемещение на другую страницу по карандашу
+for (let ed=0;ed<editButtons.length;ed++) {editButtons[ed].addEventListener("click", function () {document.location='adminFlightEdit.php';} );}     //перемещение на другую страницу по карандашу

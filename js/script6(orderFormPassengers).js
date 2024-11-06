@@ -3,16 +3,38 @@ let labelsForInputsPassenger = document.getElementsByClassName("labelJs");
 const mediaSmall = window.matchMedia("(max-width: 600px) and (orientation:portrait)");
 const mediaTablet = window.matchMedia("(max-width: 1199px) and (min-width:601px) and (orientation:portrait)");
 const mediaSmallAndTablet = window.matchMedia("(max-width: 1199px) and (orientation:portrait)");
-for (let r = 0; r < inputsFormPassenger.length; r++) {inputsFormPassenger[r].addEventListener("input", function () {if (r==(inputsFormPassenger.length-1) && mediaSmallAndTablet.matches) {inputsFormPassenger[r].style.paddingTop = "7%";} else {inputsFormPassenger[r].style.paddingTop = "3%";}
+for (let r = 0; r < inputsFormPassenger.length; r++) {inputsFormPassenger[r].addEventListener("input", function () {if (inputsFormPassenger[r].value != "") {
+   if (r==(inputsFormPassenger.length-1) && mediaSmallAndTablet.matches) {inputsFormPassenger[r].style.paddingTop = "7%";} else {inputsFormPassenger[r].style.paddingTop = "3%";}
                                                                                                             labelsForInputsPassenger[r].style.display = "block";
-                                                                                                            inputsFormPassenger[r].style.color = "black";} );        }
+                                                                                                            inputsFormPassenger[r].style.color = "black";
+
+} 
+else {
+   inputsFormPassenger[r].style.paddingTop = "0%";
+   labelsForInputsPassenger[r].style.display = "none";
+   // inputsFormPassenger[r].style.color = "black";
+}
+                                                                                                           
+                                                                                                            
+} );        }
 
 let radioButtons = document.getElementsByClassName("radioButton");
 let circleRadio = document.getElementsByClassName ("circleRadio");
 for (let m=0; m<radioButtons.length; m++) {radioButtons[m].addEventListener("click", function () {if (radioButtons[m].classList.contains("firstRadioButton")) {circleRadio[m+1].style.display="none";
-                                                        circleRadio[m].style.display="block";}
+                                                        circleRadio[m].style.display="block";
+                                                       
+                                                      
+                                                        id = m/2+1; 
+                                                        document.getElementById("gender" + id).value = 'man'; 
+                                                   
+                                                      }
                                                         else {circleRadio[m-1].style.display="none";
-                                                        circleRadio[m].style.display="block";} } ); }    //имитация работы input[type="radio"] для обычных кнопок
+                                                        circleRadio[m].style.display="block";
+                                                     
+                                                      id = m/2+0.5; 
+                                                      document.getElementById("gender" + id).value = 'woman'; 
+                                                   
+                                                } } ); }    //имитация работы input[type="radio"] для обычных кнопок
 
 
 let switchers2 = document.getElementsByClassName("switcher2");
